@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-view-documents',
@@ -6,5 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./view-documents.component.css'],
 })
 export class ViewDocumentsComponent {
+
+  @Input() myImage: any;
 
 }

@@ -10,7 +10,7 @@ import { ViewDocumentsComponent } from './view-documents/view-documents.componen
   declarations: [
     AppComponent,
     DocumentumUploadComponent,
-    ViewDocumentsComponent
+    ViewDocumentsComponent,
   ],
   imports: [
     BrowserModule,

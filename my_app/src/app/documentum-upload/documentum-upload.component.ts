@@ -8,7 +8,8 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class DocumentumUploadComponent {
 
-  myImage: any;
+  myImage: string[]=[]
+
 
   onChange($event: Event){ 
     const target= $event.target as HTMLInputElement; //target változóba mentem az eseményt kiváltó HTML elemet
@@ -18,15 +19,16 @@ export class DocumentumUploadComponent {
 
   Base64(file:File){
     const observable = new Observable((subscriber: Subscriber<any>) => {  //Observable képes előállítani aszinkron adatosrozatokat, amelyet a subscriber objektumot kap, amelyel lehetőségünk van adatokat fogadni
-      this.readFile(file, subscriber) //Itt hívjuk meg a readFile(függvényt)
+      this.readFile(file, subscriber) //Itt hívjuk meg a readFile() függvényt
     })
     observable.subscribe((data)=>{ //Itt iratkozunk fel az asszinkron adatsorozatra
-      this.myImage = data
+      this.myImage.push(data)
+      console.log(data)
     })
   }
 
   readFile(file : File, subscriber: Subscriber<any>){
-    const filereader = new FileReader() 
+    const filereader = new FileReader() //FileReader()-el olvassuk be az adatokat a kliensoldaról.
     filereader.readAsDataURL(file) //Itt olvassuk be, és alakítjuk át url-re a FileReader() segítségével
 
     filereader.onload=() => { //Betöltjük az URL-t amit fentebb kiolvastuk
@@ -35,3 +37,4 @@ export class DocumentumUploadComponent {
   }
 
 }
+
