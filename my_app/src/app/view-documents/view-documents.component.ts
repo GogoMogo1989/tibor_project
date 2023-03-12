@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-view-documents',
   templateUrl: './view-documents.component.html',
-  styleUrls: ['./view-documents.component.css']
+  styleUrls: ['./view-documents.component.css'],
 })
 export class ViewDocumentsComponent {
 

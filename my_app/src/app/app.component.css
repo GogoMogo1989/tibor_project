@@ -1,9 +1,6 @@
-h1{
-    text-align: center;
-}
 nav{
     width: 100%;
-    max-width: 740px;
+    max-width: 400px;
     margin: 0 auto;
   }
   
@@ -35,6 +32,7 @@ nav{
 
   #main{
     width: 100%;
-    max-width: 740px;
+    max-width: 400px;
+    height: 100vh;
     margin: 0 auto;
   }
