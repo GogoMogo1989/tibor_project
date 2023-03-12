@@ -1,1 +1,13 @@
-<p>hello</p>
+<header>
+  <h1>Angular Project</h1>
+  <nav>
+    <ul>
+      <li><a [routerLink]="['/view-documents']">View Documents</a></li>
+      <li><a [routerLink]="['/documentum-upload']">Documentum Upload</a></li>
+    </ul>
+  </nav>
+</header>
+<section id="main">
+  <router-outlet></router-outlet>
+</section>
+
