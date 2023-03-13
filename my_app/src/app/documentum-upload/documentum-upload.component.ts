@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
+import { LocalStorageService } from 'src/service/localstorageservice';
 
 @Component({
   selector: 'app-documentum-upload',
   templateUrl: './documentum-upload.component.html',
   styleUrls: ['./documentum-upload.component.css'],
+  providers: [LocalStorageService]
 })
 export class DocumentumUploadComponent {
 
-  myImage: string[]=[]
+  myImage: string[] = [];
 
 
   onChange($event: Event){ 
@@ -22,8 +24,8 @@ export class DocumentumUploadComponent {
       this.readFile(file, subscriber) //Itt hívjuk meg a readFile() függvényt
     })
     observable.subscribe((data)=>{ //Itt iratkozunk fel az asszinkron adatsorozatra
-      this.myImage.push(data)
-      console.log(data)
+      this.myImage.push(data);
+      this.loadArrayFromLocalStorage()
     })
   }
 
@@ -34,6 +36,13 @@ export class DocumentumUploadComponent {
     filereader.onload=() => { //Betöltjük az URL-t amit fentebb kiolvastuk
       subscriber.next(filereader.result) //Itt továbbítjuk a Observable-nek a subscribe segítségével a fájl url-jét
     }
+  }
+
+  constructor(private localStorageService: LocalStorageService) {}
+
+  loadArrayFromLocalStorage() {
+    this.localStorageService.setArrayItem('key', this.myImage);
+    console.log(this.myImage)
   }
 
 }

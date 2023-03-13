@@ -1,8 +1,8 @@
-<input type="file" (change)="onChange($event)">
-<div *ngFor="let image of myImage">
-    <img src={{image}} alt="">
-</div>
-<app-view-documents [myImage]="myImage"></app-view-documents>
+<label class="input" for="my-file-input">
+    Browsing
+</label>
+<input id="my-file-input" type="file" style="display:none" (change)="onChange($event)">
+  
 
 
 

@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()">
+     <mat-icon>menu</mat-icon>
+   </button>
+   <span class="example-spacer"></span>
+   <button mat-button class="button">
+     <span  routerLink="/view-documents">View Documents</span>
+   </button>
+   <button mat-button class="button">
+    <span routerLink="/documentum-upload">Documentum Upload</span>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav"  mode="side">
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span  routerLink="/view-documents">View Documents</span>
+    </button>
+    <button mat-button class="button2" (click)="drawer.toggle()">
+     <span routerLink="/documentum-upload">Documentum Upload</span>
+   </button>
+  </mat-drawer>
+</mat-drawer-container>
+
+
+  

@@ -1,5 +1,5 @@
-img{
-    max-width: 100%;
-    height: auto;
-    display: cover;
+.input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
