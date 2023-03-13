@@ -28,7 +28,7 @@ export class DocumentumUploadComponent {
   }
 
   readFile(file : File, subscriber: Subscriber<any>){
-    const filereader = new FileReader() //FileReader()-el olvassuk be az adatokat a kliensoldaról.
+    const filereader = new FileReader() //FileReader()-el olvassuk be az adatokat.
     filereader.readAsDataURL(file) //Itt olvassuk be, és alakítjuk át url-re a FileReader() segítségével
 
     filereader.onload=() => { //Betöltjük az URL-t amit fentebb kiolvastuk
