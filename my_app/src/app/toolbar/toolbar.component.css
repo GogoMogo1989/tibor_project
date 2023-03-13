@@ -24,6 +24,7 @@ mat-toolbar{
   width: 200px;
   height: 120px;
   margin-top:56px;
+  position: fixed;
 }
 
 .button2{
