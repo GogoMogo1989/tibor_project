@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { LocalStorageService } from 'src/service/localstorageservice';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-documentum-upload',
@@ -11,6 +12,7 @@ import { LocalStorageService } from 'src/service/localstorageservice';
 export class DocumentumUploadComponent {
 
   myImage: string[] = [];
+  apiUrl = 'http://localhost:3000/api/data';
 
 
   onChange($event: Event){ 
@@ -25,7 +27,12 @@ export class DocumentumUploadComponent {
     })
     observable.subscribe((data)=>{ //Itt iratkozunk fel az asszinkron adatsorozatra
       this.myImage.push(data);
-      this.loadArrayFromLocalStorage()
+      /* this.loadArrayFromLocalStorage() */
+      this.postServerData(this.myImage).subscribe(response => {
+        console.log(response)
+      },error => {
+        console.log(error)
+      })
     })
   }
 
@@ -38,12 +45,19 @@ export class DocumentumUploadComponent {
     }
   }
 
-  constructor(private localStorageService: LocalStorageService) {}
+ /*  constructor(private localStorageService: LocalStorageService) {}
 
   loadArrayFromLocalStorage() {
     this.localStorageService.setArrayItem('key', this.myImage);
     console.log(this.myImage)
+  } */
+
+ constructor(private http: HttpClient) {}
+
+  postServerData(data: any) {
+    return this.http.post(this.apiUrl, data);
   }
+
 
 }
 
