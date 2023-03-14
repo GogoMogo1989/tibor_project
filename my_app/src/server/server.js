@@ -15,8 +15,8 @@ app.get('/api', (req, res) => {
 app.post('/api/data', (req, res) => {
   const data = req.body;
   console.log(data);
-  // Az adatok mentése a data.json fájlba
-  fs.writeFile('..//assets/data.json', JSON.stringify(data), (err) => {
+  
+  fs.writeFile('..//assets/data.json', JSON.stringify(data), (err) => { // Az adatok mentése a data.json fájlba
     if (err) throw err;
     console.log('Az adatok mentése sikeres volt!');
     res.send('Adatok sikeresen fogadva és mentve a szerveren.');
@@ -24,8 +24,8 @@ app.post('/api/data', (req, res) => {
 });
 
 app.get('/api/data', (req, res) => {
-  // Az adatok betöltése a data.json fájlból
-  fs.readFile('..//assets/data.json', (err, data) => {
+ 
+  fs.readFile('..//assets/data.json', (err, data) => {  // Az adatok betöltése a data.json fájlból
     if (err) throw err;
     res.send(JSON.parse(data));
   });
