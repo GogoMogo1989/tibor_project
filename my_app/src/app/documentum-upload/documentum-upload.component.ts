@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { LocalStorageService } from 'src/service/localstorageservice';
+import { LocalStorageService } from 'src/localstorage_service/localstorageservice';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

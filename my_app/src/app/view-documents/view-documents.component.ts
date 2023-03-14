@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { LocalStorageService } from 'src/service/localstorageservice';
+import { LocalStorageService } from 'src/localstorage_service/localstorageservice';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewDocumentsComponent implements OnInit {
 
   imageDataArray: string[]=[];
-
+  apiUrl = 'http://localhost:3000/api/data';
 /*   constructor(private localStorageService: LocalStorageService) {}  //Itt olvassuk be a localstorage-ból az adatokat
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class ViewDocumentsComponent implements OnInit {
   constructor(private http: HttpClient) {} //Itt olvassuk be a serverről az adatokat
 
   ngOnInit() {
-    this.http.get<string[]>('/assets/data.json').subscribe(data => {
+    this.http.get<string[]>(this.apiUrl).subscribe(data => {
       this.imageDataArray = data;
       console.log(this.imageDataArray);
     });
