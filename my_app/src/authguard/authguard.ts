@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isLoggedIn()) {  //Ha az authServicben a LoggedIn=true, akkor a router a CanActive oldalakat engedélyezi a function, ha nem akkor maradunk a login oldalon.
+    if (this.authService.isLoggedIn()) {  //Ha az authServicben a LoggedIn=true, akkor a router-ban a CanActive oldalakat engedélyezi a function, ha nem akkor maradunk a login oldalon.
       return true;
     } else {
       this.router.navigate(['/login']);

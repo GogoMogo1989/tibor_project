@@ -1,11 +1,11 @@
 <div class="formClass">
   <form (ngSubmit)="onSubmit()">
       <label for="username">Felhasználónév:</label>
-      <input type="text" id="username" name="username" [(ngModel)]="username">
+      <input matInput type="text" id="username" name="username" [(ngModel)]="username">
     
       <label for="password">Jelszó:</label>
-      <input type="password" id="password" name="password" [(ngModel)]="password">
+      <input matInput type="password" id="password" name="password" [(ngModel)]="password">
     
-      <button type="submit">Bejelentkezés</button>
+      <button mat-button type="submit">Bejelentkezés</button>
   </form>
 </div>
