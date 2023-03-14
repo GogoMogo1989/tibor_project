@@ -13,6 +13,7 @@ export class ViewDocumentsComponent implements OnInit {
 
   imageDataArray: string[]=[];
   apiUrl = 'http://localhost:3000/api/data';
+  
 /*   constructor(private localStorageService: LocalStorageService) {}  //Itt olvassuk be a localstorage-ból az adatokat
 
   ngOnInit() {

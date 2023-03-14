@@ -25,7 +25,7 @@ app.post('/api/data', (req, res) => {
 
 app.get('/api/data', (req, res) => {
   // Az adatok betöltése a data.json fájlból
-  fs.readFile('data.json', (err, data) => {
+  fs.readFile('..//assets/data.json', (err, data) => {
     if (err) throw err;
     res.send(JSON.parse(data));
   });
