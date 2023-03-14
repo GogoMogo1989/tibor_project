@@ -27,8 +27,8 @@ export class DocumentumUploadComponent {
     })
     observable.subscribe((data)=>{ //Itt iratkozunk fel az asszinkron adatsorozatra
       this.myImage.push(data);
-      /* this.loadArrayFromLocalStorage() */
-      this.postServerData(this.myImage).subscribe(response => {
+      /* this.loadArrayFromLocalStorage() */  //Itt hívjuk meg a localstorage service-t
+      this.postServerData(this.myImage).subscribe(response => { //itt postolunk a serverre
         console.log(response)
       },error => {
         console.log(error)
@@ -45,14 +45,14 @@ export class DocumentumUploadComponent {
     }
   }
 
- /*  constructor(private localStorageService: LocalStorageService) {}
+ /*  constructor(private localStorageService: LocalStorageService) {}  //Itt töltjük be a kulcs-érték párokkal a base64 adatoakt a localstorage-servicebe
 
   loadArrayFromLocalStorage() {
     this.localStorageService.setArrayItem('key', this.myImage);
     console.log(this.myImage)
   } */
 
- constructor(private http: HttpClient) {}
+ constructor(private http: HttpClient) {} //Itt posztolunk a serverre
 
   postServerData(data: any) {
     return this.http.post(this.apiUrl, data);

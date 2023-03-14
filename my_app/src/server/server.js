@@ -16,7 +16,7 @@ app.post('/api/data', (req, res) => {
   const data = req.body;
   console.log(data);
   // Az adatok mentése a data.json fájlba
-  fs.writeFile('data.json', JSON.stringify(data), (err) => {
+  fs.writeFile('..//assets/data.json', JSON.stringify(data), (err) => {
     if (err) throw err;
     console.log('Az adatok mentése sikeres volt!');
     res.send('Adatok sikeresen fogadva és mentve a szerveren.');

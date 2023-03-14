@@ -13,7 +13,7 @@ export class ViewDocumentsComponent implements OnInit {
 
   imageDataArray: string[]=[];
 
- /*  constructor(private localStorageService: LocalStorageService) {}
+ /*  constructor(private localStorageService: LocalStorageService) {}  //Itt olvassuk be a localstorage-ból az adatokat
 
   ngOnInit() {
     this.imageDataArray = this.localStorageService.getArrayItem('key');
@@ -21,13 +21,13 @@ export class ViewDocumentsComponent implements OnInit {
     
   } */
 
- constructor(private http: HttpClient, private localStorageService: LocalStorageService) { }
+
+  constructor(private http: HttpClient) {} //Itt olvassuk be a serverről az adatokat
 
   ngOnInit() {
-    this.http.get<any>('http://localhost:3000/api/data').subscribe(data => {
+    this.http.get<string[]>('/assets/data.json').subscribe(data => {
       this.imageDataArray = data;
       console.log(this.imageDataArray);
-      this.localStorageService.setArrayItem('key', this.imageDataArray);
     });
   }
 
