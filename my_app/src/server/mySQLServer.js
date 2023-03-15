@@ -9,10 +9,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({limit: '50mb'}));
 
 const connection = mysql.createConnection({
-  host: 'localhost:3306',
+  host: 'localhost',
   user: 'root',
   password: 'Password12345',
-  database: 'LocalServer',
+  database: 'MySQL80',
 });
 
 
