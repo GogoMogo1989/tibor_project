@@ -23,7 +23,7 @@ app.post('/api/data', (req, res) => {
   });
 });
 
-app.get('/api/data', (req, res) => {
+app.get('/api/dataget', (req, res) => {
  
   fs.readFile('..//assets/data.json', (err, data) => {  // Az adatok betöltése a data.json fájlból
     if (err) throw err;

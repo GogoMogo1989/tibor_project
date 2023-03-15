@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewDocumentsComponent implements OnInit {
 
   imageDataArray: string[]=[];
-  apiUrl = 'http://localhost:3000/api/data';
+  apiUrl = 'http://localhost:3000/api/dataget';
   
 /*   constructor(private localStorageService: LocalStorageService) {}  //Itt olvassuk be a localstorage-ból az adatokat
 
