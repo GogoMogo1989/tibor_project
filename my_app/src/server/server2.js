@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 app.use(bodyParser.json({ limit: '500mb' }));
 
 // MongoDB kapcsolódás
-const url = 'mongodb+srv://GogoMogo1989:12345@cluster0.v457sky.mongodb.net/?retryWrites=true&w=majority';
+const url = 'mongodb+srv://GogoMogo1989:12345@cluster0.v457sky.mongodb.net/Base64?retryWrites=true&w=majority';
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('A MongoDB adatbázishoz sikeresen kapcsolódva!');
