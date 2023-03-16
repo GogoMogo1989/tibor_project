@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
-const port = process.env.PORT || 3000;
+
 
 // Middleware
 app.use(cors());
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 app.use(bodyParser.json({ limit: '500mb' }));
 
 // MongoDB kapcsolódás
-const url = 'mongodb+srv://GogoMogo1989:Password12345@cluster0.v457sky.mongodb.net/test?retryWrites=true&w=majority';
+const url = 'mongodb+srv://GogoMogo1989:12345@cluster0.v457sky.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('A MongoDB adatbázishoz sikeresen kapcsolódva!');
@@ -44,8 +44,14 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/api/data', (req, res) => {
-  const data = new DataModel(req.body);
-  console.log(data);
+  if (!req.body.file) {
+    res.status(400).send('Nincs fájl az adatokban!');
+    return;
+  }
+
+  const data = new DataModel({
+    file: req.body.file,
+  });
 
   data.save().then(() => {
     console.log('Az adatok mentése sikeres volt!');
@@ -56,8 +62,9 @@ app.post('/api/data', (req, res) => {
   });
 });
 
-app.get('/api/dataget', (req, res) => {
+app.get('/api/data', (req, res) => {
   DataModel.find({}).then((data) => {
+    console.log('Az adatok lekérdezése sikeres volt!')
     res.send(data);
   }).catch((err) => {
     console.log('Hiba az adatok lekérdezésekor:', err);
@@ -66,6 +73,7 @@ app.get('/api/dataget', (req, res) => {
 });
 
 // Szerver indítása
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`A szerver fut a ${port}-es porton!`);
 });
