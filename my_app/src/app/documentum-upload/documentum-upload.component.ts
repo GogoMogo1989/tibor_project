@@ -1,4 +1,4 @@
-/* import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { LocalStorageService } from 'src/localstorage_service/localstorageservice';
 import { HttpClient } from '@angular/common/http';
@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./documentum-upload.component.css'],
   providers: [LocalStorageService]
 })
+
+/*
 export class DocumentumUploadComponent {
 
   myImage: string[] = [];
@@ -40,7 +42,9 @@ export class DocumentumUploadComponent {
     }
   }
 
-  constructor(private localStorageService: LocalStorageService) {}  //Itt töltjük be a kulcs-érték párokkal a base64 adatoakt a localstorage-servicebe
+  constructor( //Itt töltjük be a kulcs-érték párokkal a base64 adatoakt a localstorage-servicebe
+    private localStorageService: LocalStorageService
+  ) {}  
 
   loadArrayFromLocalStorage() {
     this.localStorageService.setArrayItem('key', this.myImage);
@@ -51,33 +55,17 @@ export class DocumentumUploadComponent {
 
 } */
 
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LocalStorageService } from 'src/localstorage_service/localstorageservice';
-import { HttpClient } from '@angular/common/http';
-
-@Component({
-  selector: 'app-documentum-upload',
-  templateUrl: './documentum-upload.component.html',
-  styleUrls: ['./documentum-upload.component.css'],
-  providers: [LocalStorageService]
-})
 export class DocumentumUploadComponent {
   myImage: string[] = [];
   apiUrl = 'http://localhost:3000/api/data';
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private http: HttpClient
-  ) {}
-
-  onChange($event: Event): void {
-    const target = $event.target as HTMLInputElement;
-    const file: File = (target.files as FileList)[0];
-    this.toBase64(file);
+  onChange($event: Event){ 
+    const target= $event.target as HTMLInputElement; //target változóba mentem az eseményt kiváltó HTML elemet
+    const file: File = (target.files as FileList)[0]; //file változóba mentem a target által kiváltott esemény fájlját
+    this.Base64(file) //Itt hívom meg a Base64()-et a file változóval.
   }
 
-  toBase64(file: File): void {
+  Base64(file: File): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -90,6 +78,11 @@ export class DocumentumUploadComponent {
       });
     };
   }
+
+  constructor(
+    private localStorageService: LocalStorageService,
+    private http: HttpClient
+  ) {}
 
   postData(data: string): Observable<any> {
     return this.http.post(this.apiUrl, { file: data });
