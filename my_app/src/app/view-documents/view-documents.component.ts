@@ -36,7 +36,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewDocumentsComponent implements OnInit {
 
   imageDataArray: string[] = [];
-  apiUrl = 'http://localhost:3000/api/dataget';
+  apiUrl = 'http://localhost:3000/api/data';
 
   constructor(private http: HttpClient) {}
 
