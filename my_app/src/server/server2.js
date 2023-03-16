@@ -39,9 +39,6 @@ const dataSchema = new mongoose.Schema({
 const DataModel = mongoose.model('Data', dataSchema);
 
 // API végpontok
-app.get('/api', (req, res) => {
-  res.send('Ez egy Node.js backend!');
-});
 
 app.post('/api/data', (req, res) => {
   if (!req.body.file) {
