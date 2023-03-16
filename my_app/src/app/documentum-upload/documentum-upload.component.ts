@@ -66,22 +66,22 @@ export class DocumentumUploadComponent {
   }
 
   Base64(file: File): void {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      const dataUrl = reader.result as string;
-      this.postData(dataUrl).subscribe({
-        next: response => console.log(response),
-        error: err => console.log(err)
+    const reader = new FileReader(); //Itt hozzuk léltre a FileReader objektumot, aminek a segítségével a böngészőben olvassuk be a fájlokat
+    reader.readAsDataURL(file); //Itt olvassuk be a file-t
+    reader.onload = () => { //Itt hívódik meg az onload esemény
+      const dataUrl = reader.result as string; //Itt mentődik el a dataUrl-e a Base64 fájl
+      this.postData(dataUrl).subscribe({ //Itt hívódik meg a postData() a dataUrl-be mentődött BAse64-el
+        next: response => console.log(response), //Válasz
+        error: err => console.log(err) //Hiba
       });
     };
   }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient //Ez a HttpClient függőség miatt tud a serverrel komunikálni a komponenes
   ) {}
 
-  postData(data: string): Observable<any> {
+  postData(data: string): Observable<any> { //Itt postolunk a serverre.
     return this.http.post(this.apiUrl, { file: data });
   }
 }
