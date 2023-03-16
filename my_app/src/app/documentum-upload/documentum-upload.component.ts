@@ -70,8 +70,6 @@ export class DocumentumUploadComponent {
     reader.readAsDataURL(file);
     reader.onload = () => {
       const dataUrl = reader.result as string;
-      this.myImage.push(dataUrl);
-      this.localStorageService.setArrayItem('key', this.myImage);
       this.postData(dataUrl).subscribe({
         next: response => console.log(response),
         error: err => console.log(err)
@@ -80,7 +78,6 @@ export class DocumentumUploadComponent {
   }
 
   constructor(
-    private localStorageService: LocalStorageService,
     private http: HttpClient
   ) {}
 
