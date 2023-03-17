@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { HttpClient } from '@angular/common/http';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -45,11 +46,19 @@ export class SignupComponent {
     return this.signupForm.get('email') as FormControl;
   }
 
+  constructor(private http: HttpClient) {}
+
   onSubmit() {
     if (this.signupForm.valid &&
         this.signupForm.controls.checkboxFormControl.value &&
         this.signupForm.controls.password.value === this.signupForm.controls.confirmPassword.value) {
-      console.log("sikeres feliratkozás!")
+          const email = this.signupForm.controls.email.value;
+          const password = this.signupForm.controls.password.value;
+          this.http.post('http://localhost:8000/signup', { email, password }).subscribe(response => {
+          console.log('Sikeres felhasználó mentés a szerveren!');
+          }, error => {
+          console.log('Hiba a felhasználó mentésekor a szerveren!', error);
+          })
     } else {
       console.log("nem sikerült")
     }
