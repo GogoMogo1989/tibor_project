@@ -35,8 +35,8 @@ export class ViewDocumentsComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any[]>(this.apiUrl).subscribe(
-      data => {
+    this.http.get<any[]>(this.apiUrl).subscribe( //Itt hívódik meg az adat a apiUrl-en keresztül
+      data => { //Az adatokat map-eljük, és az ImageDataArray-ba mentjünk a file-okat.
         this.imageDataArray = data.map((d) => d.file);
         console.log(this.imageDataArray);
       },
