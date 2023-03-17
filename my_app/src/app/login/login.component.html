@@ -1,11 +1,13 @@
-<div class="formClass">
-  <form (ngSubmit)="onSubmit()">
-      <label for="username">Felhasználónév:</label>
-      <input matInput type="text" id="username" name="username" [(ngModel)]="username">
-    
-      <label for="password">Jelszó:</label>
-      <input matInput type="password" id="password" name="password" [(ngModel)]="password">
-    
-      <button mat-button type="submit">Bejelentkezés</button>
-  </form>
-</div>
+<form (ngSubmit)="onSubmit()" class="formClass">
+  <mat-form-field appearance="outline">
+    <mat-label>Felhasználónév:</mat-label>
+    <input matInput type="text" id="username" name="username" [(ngModel)]="username">
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Jelszó:</mat-label>
+    <input matInput type="password" id="password" name="password" [(ngModel)]="password">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Bejelentkezés</button>
+</form>

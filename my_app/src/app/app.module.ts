@@ -6,14 +6,20 @@ import { AppComponent } from './app.component';
 import { DocumentumUploadComponent } from './documentum-upload/documentum-upload.component';
 import { ViewDocumentsComponent } from './view-documents/view-documents.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatIconModule} from '@angular/material/icon';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import {MatSidenavModule} from '@angular/material/sidenav'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { MyErrorStateMatcher, SignupComponent } from './signup/signup.component';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,9 +28,10 @@ import { FormsModule } from '@angular/forms';
     ViewDocumentsComponent,
     ToolbarComponent,
     LoginComponent,
-    
+    SignupComponent
   ],
   imports: [
+    MatCheckboxModule,
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -33,9 +40,14 @@ import { FormsModule } from '@angular/forms';
     MatSidenavModule,
     MatButtonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

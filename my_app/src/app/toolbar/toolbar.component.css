@@ -21,13 +21,13 @@ mat-toolbar{
 
 .example-container {
   visibility: hidden;
-  width: 200px;
-  height: 120px;
+  width: 50%;
+  height: 150px;
   margin-top:56px;
   position: fixed;
 }
 
 .button2{
   width: 100%;
-  height: 50%;
+  height: 50px;
 }

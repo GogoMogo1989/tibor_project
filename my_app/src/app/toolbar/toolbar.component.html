@@ -9,6 +9,9 @@
    <button mat-button class="button">
     <span routerLink="/documentum-upload">Documents Upload</span>
   </button>
+  <button mat-button class="button">
+    <span routerLink="/signup">Sign Up</span>
+  </button>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav"  mode="side">
@@ -18,6 +21,9 @@
     <button mat-button class="button2" (click)="drawer.toggle()">
      <span routerLink="/documentum-upload">Documents Upload</span>
    </button>
+   <button mat-button class="button2" (click)="drawer.toggle()">
+    <span routerLink="/signup">Sign Up</span>
+  </button>
   </mat-drawer>
 </mat-drawer-container>
 
