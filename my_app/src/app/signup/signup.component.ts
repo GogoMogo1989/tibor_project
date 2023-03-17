@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -34,19 +35,19 @@ export class SignupComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  get confirmPasswordFormControl() {
+  get confirmPasswordFormControl(): FormControl {
     return this.signupForm.get('confirmPassword') as FormControl;
   }
-
-  get passwordFormControl() {
+  
+  get passwordFormControl(): FormControl {
     return this.signupForm.get('password') as FormControl;
   }
-
-  get emailFormControl() {
+  
+  get emailFormControl(): FormControl {
     return this.signupForm.get('email') as FormControl;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     if (this.signupForm.valid &&
@@ -54,8 +55,10 @@ export class SignupComponent {
         this.signupForm.controls.password.value === this.signupForm.controls.confirmPassword.value) {
           const email = this.signupForm.controls.email.value;
           const password = this.signupForm.controls.password.value;
-          this.http.post('http://localhost:8000/signup', { email, password }).subscribe(response => {
+          this.http.post('http://localhost:8000/signup', { email, password }).subscribe(_response => {
           console.log('Sikeres felhasználó mentés a szerveren!');
+          this.router.navigate(['/login'])
+          alert("Sikeres regisztráció!")
           }, error => {
           console.log('Hiba a felhasználó mentésekor a szerveren!', error);
           })

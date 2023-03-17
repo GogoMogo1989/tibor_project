@@ -4,15 +4,19 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:4200',
-    optionsSuccessStatus: 200
-}));
+
 app.use(bodyParser.json());
 
-const mongoURI = 'mongodb+srv://GogoMogo1989:12345@cluster0.tdidybh.mongodb.net/password?retryWrites=true&w=majority'; 
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200
+};
 
-mongoose.connect(mongoURI, { useNewUrlParser: true })
+app.use(cors(corsOptions));
+
+const mongoURI = 'mongodb+srv://GogoMogo1989:12345@cluster0.tdidybh.mongodb.net/password?retryWrites=true&w=majority';
+
+mongoose.connect(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => console.log('A MongoDB adatbázishoz sikeresen kapcsolódva!'))
   .catch(err => console.log('Hiba a MongoDB adatbázis kapcsolat során:', err));
 
@@ -29,15 +33,16 @@ app.post('/signup', (req, res) => {
   const newUser = new User({ email, password });
 
   newUser.save()
-    .then(() => {
-      console.log('Felhasználó mentve!');
-      res.sendStatus(200);
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  .then(() => {
+    console.log('Felhasználó mentve!');
+    res.status(200).json({}); 
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 });
 
 const port = process.env.PORT || 8000;
+
 app.listen(port, () => console.log(`A szerver fut a ${port}-es porton!`));
