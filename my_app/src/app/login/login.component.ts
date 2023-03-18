@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
           console.log('Bejelentkezés sikeres!');
           this.router.navigate(['/documentum-upload']);
         } else {
-          alert('Hibás felhasználó név vagy jelszó!');
+          console.log('Hibás felhasználó név vagy jelszó!');
         }
       });
   }
