@@ -2,41 +2,41 @@
   <mat-form-field class="example-full-width">
     <mat-label>Email</mat-label>
     <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-           placeholder="Ex. pat@example.com">
-    <mat-hint>Errors appear instantly!</mat-hint>
+           placeholder="user@user.com">
+    <mat-hint>Csak helyes email formátum!</mat-hint>
     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      Please enter a valid email address
+      Írd be az email címed!
     </mat-error>
     <mat-error *ngIf="emailFormControl.hasError('required')">
-      Email is <strong>required</strong>
+      Az email <strong>Helytelen email formátum.</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <mat-label>Password</mat-label>
+    <mat-label>Jelszó</mat-label>
     <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-           placeholder="Enter your password">
-    <mat-hint>Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number</mat-hint>
+           placeholder="Jelszó">
+    <mat-hint>Minimum 8 karakter, kis betűt, nagy betűt, és számot kell tartlamznia!</mat-hint>
     <mat-error *ngIf="passwordFormControl.hasError('required')">
-      Password is <strong>required</strong>
+      A jelszó: <strong>Minimum 8 karakter, kis betűt, nagy betűt, és számot kell tartlamznia!</strong>
     </mat-error>
     <mat-error *ngIf="passwordFormControl.hasError('pattern')">
-      Password must be at least 8 characters long, and contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
+      Minimum 8 karakter, kis betűt, nagy betűt, és számot kell tartlamznia!
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <mat-label>Confirm Password</mat-label>
+    <mat-label>Jelszó újra</mat-label>
     <input type="password" matInput [formControl]="confirmPasswordFormControl" [errorStateMatcher]="matcher"
-           placeholder="Confirm your password">
-    <mat-hint>Must match password</mat-hint>
+           placeholder="Jelszó újra">
+    <mat-hint>Jelszónak egyeznie kell!</mat-hint>
     <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
-      Confirm Password is <strong>required</strong>
+      Megerősített jelszó: <strong>eggyeznie kell a jelszavaknak!</strong>
     </mat-error>
     <mat-error *ngIf="confirmPasswordFormControl.hasError('passwordMatch')">
-      Passwords must match
+      Jelszónak egyeznie kell!
     </mat-error>
   </mat-form-field>
   <mat-checkbox labelPositon="after" class="example-margin" formControlName="checkboxFormControl">
-    Checkbox label
+    Elfogadom a felhasználási feltételeket.
   </mat-checkbox>
-  <button mat-raised-button color="primary" type="submit">Submit</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid || !signupForm.controls.checkboxFormControl.value">Submit</button>
 </form>
