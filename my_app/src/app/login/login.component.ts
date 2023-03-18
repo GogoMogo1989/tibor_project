@@ -19,14 +19,19 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.login(this.email, this.password)
-      .toPromise()
-      .then((success: any) => {
-        if (success) {
-          console.log('Bejelentkezés sikeres!');
-          this.router.navigate(['/documentum-upload']);
-        } else {
-          console.log('Hibás felhasználó név vagy jelszó!');
+      .subscribe(
+        success => {
+          if (success) {
+            console.log('Bejelentkezés sikeres!');
+            this.router.navigate(['/documentum-upload']);
+          } else {
+            console.log('Hibás felhasználó név vagy jelszó!');
+          }
+        },
+        error => {
+          console.log('Hiba történt a bejelentkezés során: ', error);
+          alert("Hibás felhasználónév, vagy jelszó!")
         }
-      });
+      );
   }
 }
