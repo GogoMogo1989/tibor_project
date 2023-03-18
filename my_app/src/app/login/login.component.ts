@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../authservice/authservice';
-import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../authservice/authservice'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,21 +9,24 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username: string="";
+  email: string="";
   password: string="";
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    if (this.authService.login(this.username, this.password)) {  //Submit-tal beküljük a authservice function-ba a username, password étkékeket. és ha megfelelőek, akkor a documentum-upload-ra irányít az oldal.
-      // Bejelentkezés sikeres
-      console.log('Bejelentkezés sikeres!');
-      this.router.navigate(['/documentum-upload'])
-    }else{
-      alert("Hibás felhasználó név, vagy jelszó!")
-    }
+    this.authService.login(this.email, this.password)
+      .toPromise()
+      .then((success: any) => {
+        if (success) {
+          console.log('Bejelentkezés sikeres!');
+          this.router.navigate(['/documentum-upload']);
+        } else {
+          alert('Hibás felhasználó név vagy jelszó!');
+        }
+      });
   }
 }

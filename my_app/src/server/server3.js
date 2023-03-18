@@ -33,16 +33,35 @@ app.post('/signup', (req, res) => {
   const newUser = new User({ email, password });
 
   newUser.save()
-  .then(() => {
-    console.log('Felhasználó mentve!');
-    res.status(200).json({}); 
-  })
-  .catch(err => {
-    console.log(err);
-    res.sendStatus(500);
-  });
+    .then(() => {
+      console.log('Felhasználó mentve!');
+      res.status(200).json({ message: 'Felhasználó mentve!' });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Hiba történt a mentés során!' });
+    });
+});
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email: email, password: password })
+    .then(user => {
+      if (!user) {
+        console.log('Hibás felhasználó név vagy jelszó!');
+        res.status(401).json({ message: 'Hibás felhasználó név vagy jelszó!' });
+      } else {
+        console.log('Bejelentkezés sikeres!');
+        res.status(200).json({ message: 'Bejelentkezés sikeres!' });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Hiba történt a bejelentkezés során!' });
+    });
 });
 
 const port = process.env.PORT || 8000;
 
-app.listen(port, () => console.log(`A szerver fut a ${port}-es porton!`));
+app.listen(port, ()  => console.log(`A szerver fut a ${port}-es porton!`));
