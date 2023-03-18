@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../services/signupservices';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -47,23 +48,26 @@ export class SignupComponent {
     return this.signupForm.get('email') as FormControl;
   }
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   onSubmit() {
     if (this.signupForm.valid &&
         this.signupForm.controls.checkboxFormControl.value &&
         this.signupForm.controls.password.value === this.signupForm.controls.confirmPassword.value) {
           const email = this.signupForm.controls.email.value;
-          const password = this.signupForm.controls.password.value;
-          this.http.post('http://localhost:8000/signup', { email, password }).subscribe(_response => {
-          console.log('Sikeres felhasználó mentés a szerveren!');
-          this.router.navigate(['/login'])
-          alert("Sikeres regisztráció!")
-          }, error => {
-          console.log('Hiba a felhasználó mentésekor a szerveren!', error);
-          })
+          const password = this.signupForm.controls.password.value; 
+          if (email !== null) {
+            this.userService.createUser(email ? email: undefined, password? password: undefined).subscribe(_response => {
+              console.log('Sikeres felhasználó mentés a szerveren!');
+              this.router.navigate(['/login']);
+              alert('Sikeres regisztráció!');
+            }, error => {
+              console.log('Hiba a felhasználó mentésekor a szerveren!', error);
+            });
+          }
     } else {
-      console.log("nem sikerült")
+      console.log('nem sikerült');
     }
   }
+  
 }

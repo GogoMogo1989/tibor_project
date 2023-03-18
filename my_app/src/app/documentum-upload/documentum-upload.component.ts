@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { LocalStorageService } from 'src/localstorage_service/localstorageservice';
+import { LocalStorageService } from 'src/app/services/localstorageservice';
 import { HttpClient } from '@angular/common/http';
+import { Base64Service } from '../services/documentumuploadedservices';
 
 @Component({
   selector: 'app-documentum-upload',
@@ -57,32 +58,30 @@ export class DocumentumUploadComponent {
 
 export class DocumentumUploadComponent {
   myImage: string[] = [];
-  apiUrl = 'http://localhost:3000/api/data';
-
-  onChange($event: Event){ 
-    const target= $event.target as HTMLInputElement; //target változóba mentem az eseményt kiváltó HTML elemet
-    const file: File = (target.files as FileList)[0]; //file változóba mentem a target által kiváltott esemény fájlját
-    this.Base64(file) //Itt hívom meg a Base64()-et a file változóval.
-  }
-
-  Base64(file: File): void {
-    const reader = new FileReader(); //Itt hozzuk léltre a FileReader objektumot, aminek a segítségével a böngészőben olvassuk be a fájlokat
-    reader.readAsDataURL(file); //Itt olvassuk be a file-t
-    reader.onload = () => { //Itt hívódik meg az onload esemény
-      const dataUrl = reader.result as string; //Itt mentődik el a dataUrl-e a Base64 fájl
-      this.postData(dataUrl).subscribe({ //Itt hívódik meg a postData() a dataUrl-be mentődött BAse64-el
-        next: response => console.log(response), //Válasz
-        error: err => console.log(err) //Hiba
-      });
-    };
-  }
 
   constructor(
-    private http: HttpClient //Ez a HttpClient függőség miatt tud a serverrel komunikálni a komponenes
+    private http: HttpClient,
+    private base64Service: Base64Service,
+    private localStorageService: LocalStorageService
   ) {}
 
-  postData(data: string): Observable<any> { //Itt postolunk a serverre.
-    return this.http.post(this.apiUrl, { file: data });
+  onChange($event: Event): void { 
+    const target = $event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    this.base64Service.convertFileToBase64(file)
+      .subscribe((data) => {
+        this.myImage.push(data);
+        this.localStorageService.setArrayItem('key', this.myImage);
+        this.postData(data).subscribe({
+          next: response => console.log(response),
+          error: err => console.log(err)
+        });
+      });
+  }
+
+  postData(data: string): Observable<any> {
+    const apiUrl = 'http://localhost:3000/api/data';
+    return this.http.post(apiUrl, { file: data });
   }
 }
 
