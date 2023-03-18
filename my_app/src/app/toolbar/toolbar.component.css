@@ -23,7 +23,7 @@ mat-toolbar{
   visibility: hidden;
   width: 50%;
   height: 150px;
-  margin-top:56px;
+  top:56px;
   position: fixed;
 }
 
