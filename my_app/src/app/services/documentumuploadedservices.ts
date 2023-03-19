@@ -21,5 +21,5 @@ export class Base64Service {
       };
     });
     return observable;
-  }
+  }   
 }
