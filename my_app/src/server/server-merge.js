@@ -68,8 +68,6 @@ app.get('/api/data', (req, res) => {
   });
 });
 
-const mongoURI = 'mongodb+srv://GogoMogo1989:12345@cluster0.tdidybh.mongodb.net/password?retryWrites=true&w=majority';
-
 const userSchema = new mongoose.Schema({
   email: String,
   password: String

@@ -15,6 +15,7 @@ export class Base64Service {
       reader.onload = () => {
         const dataUrl = reader.result as string;
         subscriber.next(dataUrl);
+        alert("Sikeres feltöltés!")
       };
       reader.onerror = (error) => {
         subscriber.error(error);
