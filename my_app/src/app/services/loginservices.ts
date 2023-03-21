@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {   
-    return this.http.post<any>('http://localhost:8000/login', { email, password })
+    return this.http.post<any>('http://localhost:3000/login', { email, password })
       .pipe(
         tap(response => {
           if (response && response.token) {

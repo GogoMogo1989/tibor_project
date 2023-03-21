@@ -9,7 +9,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   createUser(email: string | undefined, password: string | undefined): Observable<any> {
-    return this.http.post('http://localhost:8000/signup', {email, password});
+    return this.http.post('http://localhost:3000/signup', {email, password});
   }
 
 }
