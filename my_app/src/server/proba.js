@@ -22,6 +22,11 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Adat sémája
 const dataSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   file: {
     type: String,
     required: true,
@@ -31,11 +36,6 @@ const dataSchema = new mongoose.Schema({
       },
       message: 'A fájl nem base64 kódolt.'
     }
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
   }
 });
 
@@ -44,28 +44,85 @@ const DataModel = mongoose.model('Data', dataSchema);
 
 // API végpontok
 
-const authMiddleware = (req, res, next) => {
-  const userId = req.headers.authorization;
-  if (!userId) {
-    return res.status(401).send('Nincs hozzáférési jog!');
-  }
-  req.user = { id: userId };
-  next();
-};
-
-app.post('/api/data', authMiddleware, (req, res) => {
-  if (!req.body.file) {
-    res.status(400).send('Nincs fájl az adatokban!');
+app.post('/api/data', (req, res) => {
+  if (!req.body.file || !req.body.user._id) {
+    res.status(400).send('Nincs fájl vagy felhasználó azonosító az adatokban!');
     return;
   }
 
-  const userId = req.user.id;
-
   const data = new DataModel({
+    user: req.body.user._id,
     file: req.body.file,
-    userId: userId
   });
 
   data.save().then(() => {
     console.log('Az adatok mentése sikeres volt!');
-   
+    res.send('Adatok sikeresen fogadva és mentve a szerveren.');
+  }).catch((err) => {
+    console.log('Hiba az adatok mentésekor:', err);
+    res.status(500).send('Hiba az adatok mentésekor!');
+  });
+});
+
+
+app.get('/api/data', (req, res) => {
+  DataModel.find({ user: req.user._id }).then((data) => {
+    console.log('Az adatok lekérdezése sikeres volt!')
+    res.send(data);
+  }).catch((err) => {
+    console.log('Hiba az adatok lekérdezésekor:', err);
+    res.status(500).send('Hiba az adatok lekérdezésekor!');
+  });
+});
+
+const userSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+});
+
+const User = mongoose.model('User', userSchema);
+
+app.post('/signup', (req, res) => {
+  const { email, password } = req.body;
+
+  const newUser = new User({ email, password});
+
+  newUser.save()
+    .then(() => {
+      console.log('Felhasználó mentve!');
+      res.status(200).json({ message: 'Felhasználó mentve!' });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Hiba történt a mentés során!' });
+    });
+});
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email: email, password: password })
+    .then(user => {
+      if (!user) {
+        console.log('Hibás felhasználó név vagy jelszó!');
+        res.status(401).json({ message: 'Hibás felhasználó név vagy jelszó!' });
+      } else {
+        DataModel.find({ user: user._id }).then((data) => {
+          console.log('Az adatok lekérdezése sikeres volt!')
+          res.status(200).json({ message: 'Bejelentkezés sikeres!', data: data });
+        }).catch((err) => {
+          console.log('Hiba az adatok lekérdezésekor:', err);
+          res.status(500).json({ message: 'Hiba az adatok lekérdezésekor!' });
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Hiba történt a bejelentkezés során!' });
+    });
+});
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, ()  => console.log(`A szerver fut a ${port}-es porton!`));
+
