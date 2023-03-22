@@ -47,16 +47,17 @@ const DataModel = mongoose.model('Data', dataSchema);
 
 //Authentikáció
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.status(401).send('Nem vagy bejelentkezve!');
-
-  jwt.verify(token, secretKey, (err, user) => {
-    if (err) return res.status(403).send('Hozzáférés megtagadva!');
-
-    req.user = user;
+  try {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) throw new Error('Nem található token!');
+    const decodedToken = jwt.verify(token, secretKey);
+    req.user = decodedToken.user;
     next();
-  });
+  } catch (err) {
+    console.error(err);
+    return res.status(401).json({ message: 'Nem vagy bejelentkezve!' });
+  }
 }
 
 // API végpontok
@@ -83,13 +84,15 @@ app.post('/api/data', authenticateToken, (req, res) => {
 
 
 app.get('/api/data', authenticateToken, (req, res) => {
-  DataModel.find({ user: req.user._id }).then((data) => {
-    console.log('Az adatok lekérdezése sikeres volt!')
-    res.send(data);
-  }).catch((err) => {
-    console.log('Hiba az adatok lekérdezésekor:', err);
-    res.status(500).send('Hiba az adatok lekérdezésekor!');
-  });
+  DataModel.find({ user: req.user._id })
+    .then((data) => {
+      console.log('Az adatok lekérdezése sikeres volt!')
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log('Hiba az adatok lekérdezésekor:', err);
+      res.status(500).send('Hiba az adatok lekérdezésekor!');
+    });
 });
 
 const userSchema = new mongoose.Schema({
@@ -107,6 +110,7 @@ app.post('/signup', (req, res) => {
     .then(() => {
       console.log('Felhasználó mentve!');
       const token = jwt.sign({ email: email }, secretKey); 
+      console.log(token)
       res.status(200).json({ message: 'Felhasználó mentve!', token: token }); 
     })
     .catch(err => {
@@ -139,6 +143,7 @@ app.post('/login', (req, res) => {
     return res.status(500).send('Hiba történt az adatbázis elérésekor!');
   });
 });
+
 
 const port = process.env.PORT || 3000;
 
