@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 
 const app = express();
-const secretKey = 'mysecretkey';
+const secretKey = 'mysecretkeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy';
 
 // Middleware
 app.use(cors());
@@ -35,7 +35,7 @@ const dataSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function(v) {
-        return `/^data:[a-z]+\/[a-z]+;base64,/.test(v)`;
+        return /^data:[a-z]+\/[a-z]+;base64,/.test(v);
       },
       message: 'A fájl nem base64 kódolt.'
     }
@@ -62,14 +62,14 @@ function authenticateToken(req, res, next) {
 
 // API végpontok
 
-app.post('/api/data', authenticateToken, (req, res) => {
+app.post('/api/data', authenticateToken, (req, res) => {  
   if (!req.body.file || !req.body.user._id) {
     res.status(400).send('Nincs fájl vagy felhasználó azonosító az adatokban!');
     return;
   }
 
   const data = new DataModel({
-    user: req.body.user._id,
+    user: mongoose.Types.ObjectId(req.body.user._id),
     file: req.body.file,
   });
 
@@ -129,7 +129,7 @@ app.post('/login', (req, res) => {
       console.log('Hibás felhasználó név vagy jelszó!');
       return res.status(401).json({ message: 'Hibás felhasználó név vagy jelszó!' });
     } else {
-      DataModel.find({ user: user._id }).then((data) => {
+      DataModel.findOne({ user: user._id }).then((data) => {
         console.log('Az adatok lekérdezése sikeres volt!')
         const token = jwt.sign({ userId: user._id }, secretKey);
         return res.status(200).json({ message: 'Bejelentkezés sikeres!', data: data, token: token }); 

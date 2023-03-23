@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const secretKey = 'Password12345'; 
 
 const app = express();
 
@@ -30,7 +32,12 @@ const dataSchema = new mongoose.Schema({
         return /^data:[a-z]+\/[a-z]+;base64,/.test(v);
       },
       message: 'A fájl nem base64 kódolt.'
-    }
+    },
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 });
 
@@ -47,6 +54,7 @@ app.post('/api/data', (req, res) => {
 
   const data = new DataModel({
     file: req.body.file,
+    userId: req.user._id
   });
 
   data.save().then(() => {
@@ -59,7 +67,7 @@ app.post('/api/data', (req, res) => {
 });
 
 app.get('/api/data', (req, res) => {
-  DataModel.find({}).then((data) => {
+  DataModel.find({userId: req.user._id}).then((data) => { 
     console.log('Az adatok lekérdezése sikeres volt!')
     res.send(data);
   }).catch((err) => {
@@ -92,7 +100,7 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const {email, password } = req.body;
+  const { email, password } = req.body;
 
   User.findOne({ email: email, password: password })
     .then(user => {
@@ -101,7 +109,9 @@ app.post('/login', (req, res) => {
         res.status(401).json({ message: 'Hibás felhasználó név vagy jelszó!' });
       } else {
         console.log('Bejelentkezés sikeres!');
-        res.status(200).json({ message: 'Bejelentkezés sikeres!' });
+        const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+        req.user = user;
+        res.status(200).json({ message: 'Bejelentkezés sikeres!', token: token });
       }
     })
     .catch(err => {
