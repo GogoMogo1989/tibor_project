@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.0",
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.2",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "uuid": "^9.0.0"
   }
 }

@@ -12,7 +12,19 @@ export class AuthService {
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        this.currentUserSubject = new BehaviorSubject<any>(parsedUser);
+      } catch (e) {
+        console.error('Error parsing stored user:', e);
+        this.currentUserSubject = new BehaviorSubject<any>(null);
+        localStorage.removeItem('currentUser');
+      }
+    } else {
+      this.currentUserSubject = new BehaviorSubject<any>(null);
+    }
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -25,11 +37,11 @@ export class AuthService {
       .pipe(
         tap(response => {
           if (response && response.token) {
-            // Autentikációs adatok beállítása cookie-ként
-            document.cookie = `currentUser=${JSON.stringify(response)}; path=/;`;
+            localStorage.setItem('currentUser', JSON.stringify(response));
             this.currentUserSubject.next(response);
-            console.log('Login successful. currentUser cookie:', document.cookie);
+            console.log('Login successful. currentUser:', response);
           }
+          this.saveEmail(email);
         })
       );
   }
@@ -37,8 +49,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    // Autentikációs adatok törlése a cookie-ból is
-    document.cookie = `currentUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   }
 
   getCurrentUser() {
@@ -46,22 +56,40 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    // Az autentikációs adatok lekérése a cookie-ból
-    const cookie = document.cookie.split(';').find((c: string) => c.trim().startsWith('currentUser='));
-    const user = cookie ? JSON.parse(cookie.split('=')[1]) : null;
-  // Az autentikációs adatok ellenőrzése
-  return this.currentUserSubject.asObservable().pipe(
-    map((userSubject: any) => {
-      if (user && user.token) {
-        return true;
+    const storedUser = localStorage.getItem('currentUser');
+    const user = storedUser ? JSON.parse(storedUser) : null;
+
+    return this.currentUserSubject.asObservable().pipe(
+      map((userSubject: any) => {
+        if (user && user.token) {
+          return true;
         } else if (userSubject && userSubject.token) {
-          // Az autentikációs adatok frissítése a cookie-ban
-          document.cookie = `currentUser=${JSON.stringify(userSubject)}; path=/`;
+          localStorage.setItem('currentUser', JSON.stringify(userSubject));
           return true;
         } else {
           return false;
         }
       })
     );
+  }
+
+  private saveEmail(email: string) {
+    localStorage.removeItem('email')
+    if(email){
+    localStorage.setItem('email', email);
+    }else{
+      console.log("nincs új email cím érték")
+    }
+  }
+
+  getEmail() {
+    // Visszaadjuk az email címet, de előtte frissítjük a localStorage-ban tárolt értéket
+    let email = localStorage.getItem('email');
+    if (email === null) {
+      email = ''; // vagy más alapértelmezett érték
+    }
+    localStorage.setItem('email', email);
+    console.log(email)
+    return email;
   }
 }

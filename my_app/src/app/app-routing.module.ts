@@ -11,7 +11,7 @@ const routes: Routes = [
     {path: 'documentum-upload', component: DocumentumUploadComponent, canActivate: [AuthGuard]},
     {path:'view-documents', component: ViewDocumentsComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
-    {path: 'signup', component: SignupComponent},
+    {path: 'signup', component: SignupComponent}
 ];
 
 @NgModule({

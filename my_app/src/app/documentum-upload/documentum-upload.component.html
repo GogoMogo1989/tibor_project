@@ -1,8 +1,10 @@
-<label class="input" for="my-file-input">
-    Browsing
-</label>
-<input id="my-file-input" type="file" style="display:none" (change)="onChange($event)">
-  
-
-
-
+<div id="input">
+  <label class="input" for="my-file-input">Browsing</label>
+  <input type="file" id="my-file-input" accept="image/*" hidden>
+  <select id="my-select" [(ngModel)]="selectedOption">
+    <option value="szamla">Számla</option>
+    <option value="szamlakivonat">Számlakivonat</option>
+    <option value="egyeb">Egyéb</option>
+  </select>
+  <button (click)="uploadButton()">Upload</button>
+</div>

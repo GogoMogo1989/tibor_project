@@ -3,11 +3,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const uuid = require('uuid');
 const secretKey = 'Password12345'; 
 
 const app = express();
 
+
 // Middleware
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 app.use(bodyParser.json({ limit: '500mb' }));
@@ -24,6 +27,18 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Adat sémája
 const dataSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    default: function() {
+      let id = '';
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < 10; i++) {
+        id += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return id;
+    }
+  },
   file: {
     type: String,
     required: true,
@@ -110,6 +125,7 @@ app.post('/login', (req, res) => {
       } else {
         console.log('Bejelentkezés sikeres!');
         const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+        console.log()
         req.user = user;
         res.status(200).json({ message: 'Bejelentkezés sikeres!', token: token });
       }

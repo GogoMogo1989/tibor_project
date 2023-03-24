@@ -28,7 +28,7 @@ import { LoginComponent } from './login/login.component';
     ViewDocumentsComponent,
     ToolbarComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     MatCheckboxModule,
