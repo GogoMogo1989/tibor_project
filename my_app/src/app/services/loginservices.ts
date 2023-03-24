@@ -36,12 +36,10 @@ export class AuthService {
     return this.http.post<any>('http://localhost:3000/login', { email, password })
       .pipe(
         tap(response => {
-          if (response && response.token) {
             localStorage.setItem('currentUser', JSON.stringify(response));
             this.currentUserSubject.next(response);
             console.log('Login successful. currentUser:', response);
-          }
-          this.saveEmail(email);
+            this.saveEmail(email);
         })
       );
   }

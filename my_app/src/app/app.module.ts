@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MyErrorStateMatcher, SignupComponent } from './signup/signup.component';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -31,6 +32,7 @@ import { LoginComponent } from './login/login.component';
     SignupComponent,
   ],
   imports: [
+    MatSelectModule,
     MatCheckboxModule,
     BrowserModule,
     AppRoutingModule,
