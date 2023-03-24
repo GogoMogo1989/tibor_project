@@ -2,5 +2,12 @@ img{
     width: 100%;
     height: auto;
     display: cover;
-    padding-top:57px;
+   /*  padding-top:57px; */
+}
+
+p{
+    font-size: 15px;
+    font-weight: bolder;
+    padding-top: 75px;
+    padding-left: 10px;
 }

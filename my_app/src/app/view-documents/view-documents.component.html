@@ -1,3 +1,4 @@
 <div *ngFor="let image of imageDataArray" class="image">
-    <img src={{image}} alt="">
+    <p>{{ image.option }}</p>
+    <img [src]="image.file" alt="">
 </div>

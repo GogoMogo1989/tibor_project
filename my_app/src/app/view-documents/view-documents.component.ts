@@ -26,14 +26,17 @@ export class ViewDocumentsComponent implements OnInit {
 
 export class ViewDocumentsComponent implements OnInit {
 
-  imageDataArray: string[] = [];
+  imageDataArray: any[] = [];
 
-  constructor(private localStorageService: LocalStorageService, private dataService: DataService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.dataService.getData().subscribe(
       data => {
-        this.imageDataArray = data.map((d) => d.file);
+        this.imageDataArray = data.map((d) => ({
+          file: d.file,
+          option: d.option
+        }));
         console.log(this.imageDataArray);
       },
       error => {
