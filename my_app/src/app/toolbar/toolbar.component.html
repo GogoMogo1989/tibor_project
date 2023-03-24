@@ -12,9 +12,6 @@
   <button mat-button class="button">
     <span routerLink="/signup">Sign Up</span>
   </button>
-  <button mat-button class="button">
-    <span routerLink="/login">Logout</span>
-  </button>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav"  mode="side">
@@ -26,9 +23,6 @@
    </button>
    <button mat-button class="button2" (click)="drawer.toggle()">
     <span routerLink="/signup">Sign Up</span>
-  </button>
-  <button mat-button class="button2" (click)="drawer.toggle()">
-    <span routerLink="/login">Logout</span>
   </button>
   </mat-drawer>
 </mat-drawer-container>
