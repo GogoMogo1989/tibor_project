@@ -10,7 +10,6 @@ import { tap, map } from 'rxjs/operators';
 export class AuthService {
 
   private currentUserSubject: BehaviorSubject<any>;
-  public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser')
@@ -26,7 +25,6 @@ export class AuthService {
     } else {
       this.currentUserSubject = new BehaviorSubject<any>(null);
     }
-    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): any {
