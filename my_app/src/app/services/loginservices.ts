@@ -17,6 +17,7 @@ export class AuthService {
       try {
         const parsedUser = JSON.parse(storedUser);
         this.currentUserSubject = new BehaviorSubject<any>(parsedUser);
+        localStorage.removeItem('currentUser');
       } catch (e) {
         console.error('Error parsing stored user:', e);
         this.currentUserSubject = new BehaviorSubject<any>(null);
@@ -33,7 +34,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/login', { email, password })
+    return this.http.post<any>('http://localhost:3000/login', { email, password})
       .pipe(
         tap(response => {
             localStorage.setItem('currentUser', JSON.stringify(response));
