@@ -21,7 +21,6 @@ export class AuthService {
       } catch (e) {
         console.error('Error parsing stored user:', e);
         this.currentUserSubject = new BehaviorSubject<any>(null);
-        localStorage.removeItem('currentUser');
       }
     } else {
       this.currentUserSubject = new BehaviorSubject<any>(null);
@@ -82,10 +81,9 @@ export class AuthService {
   }
 
   getEmail() {
-    // Visszaadjuk az email címet, de előtte frissítjük a localStorage-ban tárolt értéket
     let email = localStorage.getItem('email');
     if (email === null) {
-      email = ''; // vagy más alapértelmezett érték
+      email = ''; 
     }
     localStorage.setItem('email', email);
     console.log(email)
