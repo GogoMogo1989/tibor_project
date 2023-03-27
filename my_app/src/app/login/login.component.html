@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" class="formClass">
   <mat-form-field appearance="outline">
-    <mat-label>Felhasználónév:</mat-label>
+    <mat-label>Email-cím:</mat-label>
     <input matInput type="text" id="email" name="email" [(ngModel)]="email">
   </mat-form-field>
   
@@ -10,4 +10,5 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">Bejelentkezés</button>
+  <button mat-raised-button color="primary" type="">Felhasználó törlése</button>
 </form>

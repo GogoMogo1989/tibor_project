@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { LocalStorageService } from 'src/app/services/localstorageservice';
-import { HttpClient } from '@angular/common/http'; 
 import { DataService } from '../services/viewdocumentservices';
 
 
@@ -31,18 +30,20 @@ export class ViewDocumentsComponent implements OnInit {
   constructor(private dataService: DataService) {}
   
   ngOnInit() {
+    this.loadData();
+  }
+  
+  loadData() {
     this.dataService.getData().subscribe(
-          data => {
-            this.imageDataArray = data.map((d) => ({
-            file: d.file,
-            option: d.option,
-            id: d._id // id hozzáadása
-          }
-        )
-      );
+      data => {
+        this.imageDataArray = data.map((d) => ({
+          file: d.file,
+          option: d.option,
+          id: d._id // id hozzáadása
+        }));
         console.log(this.imageDataArray);
       },
-        error => {
+      error => {
         console.log('Hiba az adatok lekérdezésekor:', error);
       }
     );
@@ -50,14 +51,14 @@ export class ViewDocumentsComponent implements OnInit {
   
   deleteImage(id: string) {
     const confirmDelete = confirm('Biztos törölni szeretné ezt a képet?'); // megerősítő ablak
-      if (confirmDelete) {
-        this.dataService.deleteData(id).subscribe(
-          res => {
-            console.log(res);
-            this.imageDataArray = this.imageDataArray.filter(image => image.id !== id); // kép eltávolítása az imageDataArray-ból
-          },
-          error => console.log(error)
-        );
-      }
+    if (confirmDelete) {
+      this.dataService.deleteData(id).subscribe(
+        res => {
+          console.log(res);
+          this.imageDataArray = this.imageDataArray.filter(image => image.id !== id); // kép eltávolítása az imageDataArray-ból
+        },
+        error => console.log(error)
+      );
     }
+  }
 }
