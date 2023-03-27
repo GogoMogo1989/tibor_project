@@ -61,7 +61,7 @@ export class DocumentumUploadComponent {
   }
 
   uploadButton(): void {
-    const inputElement = document.getElementById('my-file-input') as HTMLInputElement;
+    const inputElement = document.getElementById('file-input') as HTMLInputElement;
     const file: File = (inputElement.files as FileList)[0];
     if (!file) return;
 

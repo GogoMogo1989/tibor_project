@@ -78,6 +78,8 @@ app.get('/api/data', (req, res) => {
   });
 });
 
+
+
 const userSchema = new mongoose.Schema({
   email: String,
   password: String

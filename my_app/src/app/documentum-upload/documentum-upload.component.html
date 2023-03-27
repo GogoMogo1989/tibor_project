@@ -1,18 +1,13 @@
 <div id="input">
-  <mat-form-field>
-    <mat-label>Browsing</mat-label>
-    <input type="" matInput accept="image/*" #fileInput hidden>
-  </mat-form-field>
+  <label for="file-input">Browsing</label>
+  <input type="file" id="file-input" accept="image/*" #fileInput hidden>
   
-  <mat-form-field>
-    <mat-label>Select option</mat-label>
-    <mat-select [(value)]="selectedOption">
-      <mat-option value="Számla">Számla</mat-option>
-      <mat-option value="Számlakivonat">Számlakivonat</mat-option>
-      <mat-option value="Egyéb">Egyéb</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <label for="select-option">Select option</label>
+  <select id="select-option" [(ngModel)]="selectedOption">
+    <option value="Számla">Számla</option>
+    <option value="Számlakivonat">Számlakivonat</option>
+    <option value="Egyéb">Egyéb</option>
+  </select>
   
-  <button mat-raised-button color="primary" (click)="fileInput.click()">Upload</button>
-
+  <button (click)="uploadButton()">Upload</button>
 </div>
