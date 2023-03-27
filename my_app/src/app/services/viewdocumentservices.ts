@@ -4,18 +4,22 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+providedIn: 'root'
 })
 export class DataService {
 
-  apiUrl = 'http://localhost:3000/api/data';
+apiUrl = 'http://localhost:3000/api/data';
 
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { }
 
-  getData(): Observable<any[]> {
-    const userEmail = localStorage.getItem('email'); // az email cím lekérése a localStorage-ból
+getData(): Observable<any[]> {
+  const userEmail = localStorage.getItem('email');
     return this.http.get<any[]>(`${this.apiUrl}?email=${userEmail}`).pipe(
-      map(data => data.filter(item => item.email === userEmail))
-    );
+    map(data => data.filter(item => item.email === userEmail))
+  );
+}
+
+deleteData(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

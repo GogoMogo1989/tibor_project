@@ -1,4 +1,5 @@
 <div *ngFor="let image of imageDataArray" class="image">
     <p>{{ image.option }}</p>
     <img [src]="image.file" alt="">
+    <button mat-raised-button (click)="deleteImage(image.id)">Törlés</button>
 </div>

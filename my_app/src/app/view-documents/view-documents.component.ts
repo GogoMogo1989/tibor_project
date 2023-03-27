@@ -27,21 +27,37 @@ export class ViewDocumentsComponent implements OnInit {
 export class ViewDocumentsComponent implements OnInit {
 
   imageDataArray: any[] = [];
-
+  
   constructor(private dataService: DataService) {}
-
+  
   ngOnInit() {
     this.dataService.getData().subscribe(
-      data => {
-        this.imageDataArray = data.map((d) => ({
-          file: d.file,
-          option: d.option
-        }));
+          data => {
+            this.imageDataArray = data.map((d) => ({
+            file: d.file,
+            option: d.option,
+            id: d._id // id hozzáadása
+          }
+        )
+      );
         console.log(this.imageDataArray);
       },
-      error => {
+        error => {
         console.log('Hiba az adatok lekérdezésekor:', error);
       }
     );
   }
+  
+  deleteImage(id: string) {
+    const confirmDelete = confirm('Biztos törölni szeretné ezt a képet?'); // megerősítő ablak
+      if (confirmDelete) {
+        this.dataService.deleteData(id).subscribe(
+          res => {
+            console.log(res);
+            this.imageDataArray = this.imageDataArray.filter(image => image.id !== id); // kép eltávolítása az imageDataArray-ból
+          },
+          error => console.log(error)
+        );
+      }
+    }
 }
