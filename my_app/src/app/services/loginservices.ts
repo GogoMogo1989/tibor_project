@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('currentUser');
+    const storedUser = localStorage.getItem('currentUser')
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
@@ -53,22 +54,13 @@ export class AuthService {
     return this.currentUserSubject.asObservable();
   }
 
-  isLoggedIn(): Observable<boolean> {
+  isLoggedIn(): boolean {
     const storedUser = localStorage.getItem('currentUser');
     const user = storedUser ? JSON.parse(storedUser) : null;
-
-    return this.currentUserSubject.asObservable().pipe(
-      map((userSubject: any) => {
-        if (user && user.token) {
-          return true;
-        } else if (userSubject && userSubject.token) {
-          localStorage.setItem('currentUser', JSON.stringify(userSubject));
-          return true;
-        } else {
-          return false;
-        }
-      })
-    );
+    console.log(storedUser)
+    console.log(user)
+  
+    return storedUser !== null && user !== null;
   }
 
   private saveEmail(email: string) {
