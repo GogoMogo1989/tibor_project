@@ -45,22 +45,15 @@ export class AuthService {
       );
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-  }
-
   getCurrentUser() {
     return this.currentUserSubject.asObservable();
   }
 
   isLoggedIn(): boolean {
     const storedUser = localStorage.getItem('currentUser');
-    const user = storedUser ? JSON.parse(storedUser) : null;
     console.log(storedUser)
-    console.log(user)
   
-    return storedUser !== null && user !== null;
+    return storedUser !== null;
   }
 
   private saveEmail(email: string) {

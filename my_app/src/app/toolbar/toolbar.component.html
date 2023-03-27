@@ -13,7 +13,7 @@
     <span routerLink="/signup">Sign Up</span>
   </button>
   <button mat-button class="button">
-    <span routerLink="/login">Login</span>
+    <span routerLink="/login" >{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
   </button>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
@@ -28,7 +28,7 @@
     <span routerLink="/signup">Sign Up</span>
   </button>
   <button mat-button class="button2" (click)="drawer.toggle()">
-    <span routerLink="/login">Login</span>
+    <span routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
   </button>
   </mat-drawer>
 </mat-drawer-container>
