@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { LocalStorageService } from 'src/app/services/localstorageservice';
 import { DataService } from '../services/viewdocumentservices';
 
-
 @Component({
   selector: 'app-view-documents',
   templateUrl: './view-documents.component.html',
