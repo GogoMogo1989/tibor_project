@@ -38,7 +38,7 @@ export class AuthService {
             localStorage.setItem('currentUser', JSON.stringify(response));
             this.currentUserSubject.next(response);
             console.log('Login successful. currentUser:', response);
-            this.saveEmail(email);
+            this.saveEmail(email)
         })
       );
   }
@@ -49,7 +49,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const storedUser = localStorage.getItem('currentUser');
-    console.log(storedUser)
   
     return storedUser !== null;
   }
