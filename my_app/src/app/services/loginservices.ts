@@ -68,7 +68,6 @@ export class AuthService {
       email = ''; 
     }
     localStorage.setItem('email', email);
-    console.log(email)
     return email;
   }
 }
