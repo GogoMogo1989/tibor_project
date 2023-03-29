@@ -37,7 +37,6 @@ export class AuthService {
         tap(response => {
             localStorage.setItem('currentUser', JSON.stringify(response));
             this.currentUserSubject.next(response);
-            console.log('Login successful. currentUser:', response);
             this.saveEmail(email);
             
         })
