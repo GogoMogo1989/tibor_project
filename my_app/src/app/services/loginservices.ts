@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -38,7 +38,8 @@ export class AuthService {
             localStorage.setItem('currentUser', JSON.stringify(response));
             this.currentUserSubject.next(response);
             console.log('Login successful. currentUser:', response);
-            this.saveEmail(email)
+            this.saveEmail(email);
+            
         })
       );
   }
@@ -49,7 +50,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const storedUser = localStorage.getItem('currentUser');
-  
     return storedUser !== null;
   }
 
@@ -70,4 +70,5 @@ export class AuthService {
     localStorage.setItem('email', email);
     return email;
   }
+
 }

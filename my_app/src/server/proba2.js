@@ -71,12 +71,14 @@
   app.get('/api/data', (req, res) => {
     DataModel.find({}).then((data) => {
       console.log('Az adatok lekérdezése sikeres volt!')
+
       res.send(data);
     }).catch((err) => {
       console.log('Hiba az adatok lekérdezésekor:', err);
       res.status(500).send('Hiba az adatok lekérdezésekor!');
     });
   });
+
 
   app.delete('/api/data/:id', (req, res) => {
     const id = req.params.id;
@@ -132,6 +134,18 @@
         console.log(err);
         res.status(500).json({ message: 'Hiba történt a bejelentkezés során!' });
       });
+  });
+
+  app.delete('/api/delete-user', (req, res) => {
+    this.http.delete('/api/data').subscribe(() => {
+      localStorage.removeItem('currentUser');
+      this.currentUserSubject.next(null);
+      console.log('User deleted.');
+      res.send('Felhasználó törölve!');
+    }, error => {
+      console.error('Error deleting user:', error);
+      res.status(500).send('Hiba történt a felhasználó törlésekor!');
+    });
   });
 
   const port = process.env.PORT || 3000;

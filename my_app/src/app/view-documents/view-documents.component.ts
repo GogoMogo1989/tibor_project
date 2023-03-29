@@ -38,7 +38,7 @@ export class ViewDocumentsComponent implements OnInit {
         this.imageDataArray = data.map((d) => ({
           file: d.file,
           option: d.option,
-          id: d._id // id hozzáadása
+          id: d._id 
         }));
         console.log(this.imageDataArray);
       },
