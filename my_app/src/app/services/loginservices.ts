@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
+import { LocalStorageService } from './localstorageservice';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ export class AuthService {
 
   private currentUserSubject: BehaviorSubject<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
     const storedUser = localStorage.getItem('currentUser')
     if (storedUser) {
       try {
@@ -32,14 +33,16 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/login', { email, password})
+    return this.http.post<any>('http://localhost:3000/login', { email, password })
       .pipe(
-        tap(response => {
-            localStorage.setItem('currentUser', JSON.stringify(response));
-            this.currentUserSubject.next(response);
-            this.saveEmail(email);
-            
-        })
+        map(response => {
+          const userId = response.userId;
+          localStorage.setItem('_id', userId);
+          localStorage.setItem('currentUser', JSON.stringify(response));
+          this.currentUserSubject.next(response);
+          this.saveEmail(email);
+          return { userId, ...response };
+        }),
       );
   }
 
@@ -68,6 +71,11 @@ export class AuthService {
     }
     localStorage.setItem('email', email);
     return email;
+  }
+
+  deleteUser() {
+    const userId = localStorage.getItem('_id')
+    return this.http.delete(`http://localhost:3000/api/user/${userId}` ,{responseType: 'text'});
   }
 
 }

@@ -4,6 +4,9 @@
    </button>
    <span class="example-spacer"></span>
    <button mat-button class="button">
+    <span  routerLink="/delete-user">Delete Registry</span>
+  </button>
+   <button mat-button class="button">
      <span  routerLink="/view-documents">View Documents</span>
    </button>
    <button mat-button class="button">
@@ -23,13 +26,16 @@
     </button>
     <button mat-button class="button2" (click)="drawer.toggle()">
      <span routerLink="/documentum-upload">Documents Upload</span>
-   </button>
-   <button mat-button class="button2" (click)="drawer.toggle()">
-    <span routerLink="/signup">Sign Up</span>
-  </button>
-  <button mat-button class="button2" (click)="drawer.toggle()">
-    <span routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
-  </button>
+    </button>
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span routerLink="/signup">Sign Up</span>
+    </button>
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span  routerLink="/delete-user">Delete Registry</span>
+    </button> 
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
+    </button>
   </mat-drawer>
 </mat-drawer-container>
 

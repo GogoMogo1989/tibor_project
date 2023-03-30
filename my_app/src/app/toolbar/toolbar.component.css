@@ -22,7 +22,7 @@ mat-toolbar{
 .example-container {
   visibility: hidden;
   width: 50%;
-  height: 201px;
+  height: 250px;
   top:56px;
   position: fixed;
 }

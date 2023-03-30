@@ -4,6 +4,7 @@ import { LocalStorageService } from 'src/app/services/localstorageservice';
 import { HttpClient } from '@angular/common/http';
 import { Base64Service } from '../services/documentumuploadedservices';
 import { AuthService } from '../services/loginservices';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documentum-upload',
@@ -56,6 +57,7 @@ export class DocumentumUploadComponent {
     private base64Service: Base64Service,
     private localStorageService: LocalStorageService,
     private authService: AuthService,
+    private router: Router
   ) {
     this.email = authService.getEmail();
   }

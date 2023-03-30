@@ -13,7 +13,7 @@ const routes: Routes = [
     {path:'view-documents', component: ViewDocumentsComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupComponent},
-    {path: 'delete_user', component: DeleteUserComponent}
+    {path: 'delete-user', component: DeleteUserComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

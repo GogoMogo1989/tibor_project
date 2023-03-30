@@ -127,7 +127,8 @@
           res.status(401).json({ message: 'Hibás felhasználó név vagy jelszó!' });
         } else {
           console.log('Bejelentkezés sikeres!');
-          res.status(200).json({ message: 'Bejelentkezés sikeres!' });
+          console.log('A felhasználó _id-je:', user._id);
+          res.status(200).json({ message: 'Bejelentkezés sikeres!', userId: user._id });
         }
       })
       .catch(err => {
@@ -136,15 +137,15 @@
       });
   });
 
-  app.delete('/api/delete-user', (req, res) => {
-    this.http.delete('/api/data').subscribe(() => {
-      localStorage.removeItem('currentUser');
-      this.currentUserSubject.next(null);
-      console.log('User deleted.');
-      res.send('Felhasználó törölve!');
-    }, error => {
-      console.error('Error deleting user:', error);
-      res.status(500).send('Hiba történt a felhasználó törlésekor!');
+  app.delete('/api/user/:id', (req, res) => {
+    const userId = req.params.id;
+  
+    User.findByIdAndRemove(userId).then(() => {
+      console.log('A felhasználó törlése sikeres volt!');
+      res.send('A felhasználó törlése sikeres volt!');
+    }).catch((err) => {
+      console.log('Hiba a felhasználó törlésekor:', err);
+      res.status(500).send('Hiba a felhasználó törlésekor!');
     });
   });
 
