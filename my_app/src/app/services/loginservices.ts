@@ -73,6 +73,8 @@ export class AuthService {
     return email;
   }
 
+  
+
   deleteUser() {
     const userId = localStorage.getItem('_id')
     return this.http.delete(`http://localhost:3000/api/user/${userId}` ,{responseType: 'text'});
