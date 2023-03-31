@@ -77,7 +77,7 @@
   });
 
 
-  //Kijelölt adatok törlése
+  //Kijelölt adatok törlése a view-documentum-ban
   app.delete('/api/data/:id', (req, res) => {
     const id = req.params.id;
     DataModel.findByIdAndDelete(id)
