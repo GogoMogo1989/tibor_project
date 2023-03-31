@@ -149,6 +149,29 @@
     });
   });
 
+  app.delete('/api/user/:id/:email', (req, res) => {
+    const id = req.params.id;
+    const email = req.params.email;
+    
+    User.findByIdAndDelete(id)
+      .then(() => {
+        console.log('A felhasználó törlése sikeres volt!');
+        DataModel.deleteMany({ email: email })
+          .then(() => {
+            console.log('A felhasználóhoz tartozó adatok is törölve lettek!');
+            res.status(200).send('A felhasználó törlése sikeres volt!');
+          })
+          .catch((err) => {
+            console.log('Hiba a felhasználóhoz tartozó adatok törlésekor:', err);
+            res.status(500).send('Hiba a felhasználó törlésekor!');
+          });
+      })
+      .catch((err) => {
+        console.log('Hiba a felhasználó törlésekor:', err);
+        res.status(500).send('Hiba a felhasználó törlésekor!');
+      });
+  });
+
   const port = process.env.PORT || 3000;
 
   app.listen(port, ()  => console.log(`A szerver fut a ${port}-es porton!`));

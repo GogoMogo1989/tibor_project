@@ -76,8 +76,9 @@ export class AuthService {
   
 
   deleteUser() {
-    const userId = localStorage.getItem('_id')
-    return this.http.delete(`http://localhost:3000/api/user/${userId}` ,{responseType: 'text'});
+    const userId = localStorage.getItem('_id');
+    const userEmail = localStorage.getItem('email');
+    return this.http.delete(`http://localhost:3000/api/user/${userId}/${userEmail}` ,{responseType: 'text'});
   }
 
 }

@@ -20,7 +20,7 @@ export class DeleteUserComponent {
       this.authService.deleteUser().subscribe(() => {
         console.log('A felhasználó törlése sikeres volt!');
         this.router.navigate(['/login']);
-      }, (err) => {
+      }, (err: Error) => {
         console.log('Hiba a felhasználó törlésekor:', err);
       });
     }
