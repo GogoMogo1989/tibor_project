@@ -15,7 +15,7 @@ export class DeleteUserComponent {
   ){}
 
   deleteUserBtn() {
-    const confirmDelete = confirm('Biztos töröli a felhasználót?');
+    const confirmDelete = confirm('Biztos töröli a felhasználót, és a hozzátartozó összes adatot?');
     if(confirmDelete){
       this.authService.deleteUser().subscribe(() => {
         console.log('A felhasználó törlése sikeres volt!');

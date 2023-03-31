@@ -68,6 +68,7 @@ export class SignupComponent {
           }
     } else {
       console.log('nem sikerült');
+      alert('Jelszónak egyeznie kell, és kérlek fogadd el a felhasználási feltételeket!')
     }
   }
   
