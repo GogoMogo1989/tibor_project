@@ -20,7 +20,7 @@
       console.log('Hiba a MongoDB adatbázis kapcsolat során:', err);
     });
 
-  // Adat sémája
+  //Documentum-upload álltal feltöltött adatok és annak sémája
   const dataSchema = new mongoose.Schema({
     file: {
       type: String,
@@ -42,10 +42,7 @@
     }
   });
 
-  // Adat modellje
   const DataModel = mongoose.model('Data', dataSchema);
-
-  // API végpontok
 
   app.post('/api/data', (req, res) => {
     if (!req.body.file) {
@@ -68,6 +65,7 @@
     });
   });
 
+  //Adatok lekérdezése a documentum-view-ban
   app.get('/api/data', (req, res) => {
     DataModel.find({}).then((data) => {
       console.log('Az adatok lekérdezése sikeres volt!')
@@ -80,6 +78,7 @@
   });
 
 
+  //Kijelölt adatok törlése
   app.delete('/api/data/:id', (req, res) => {
     const id = req.params.id;
     DataModel.findByIdAndDelete(id)
@@ -93,7 +92,7 @@
       });
   });
 
-
+  //Regisztráció és a hozzátartozó séma
   const userSchema = new mongoose.Schema({
     email: String,
     password: String
@@ -117,6 +116,7 @@
       });
   });
 
+  //Bejelentkezés
   app.post('/login', (req, res) => {
     const {email, password } = req.body;
 
@@ -137,6 +137,7 @@
       });
   });
 
+  //Felhasználó törlése
   app.delete('/api/user/:id', (req, res) => {
     const userId = req.params.id;
   
@@ -148,7 +149,8 @@
       res.status(500).send('Hiba a felhasználó törlésekor!');
     });
   });
-
+  
+  //Felhasználóhoz tartozó adatokkal együtt
   app.delete('/api/user/:id/:email', (req, res) => {
     const id = req.params.id;
     const email = req.params.email;
