@@ -31,11 +31,11 @@
       <span routerLink="/signup">Sign Up</span>
     </button>
     <button mat-button class="button2" (click)="drawer.toggle()">
-      <span  routerLink="/delete-user">Delete Registry</span>
-    </button> 
-    <button mat-button class="button2" (click)="drawer.toggle()">
       <span routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
     </button>
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span  routerLink="/delete-user">Delete Registry</span>
+    </button> 
   </mat-drawer>
 </mat-drawer-container>
 
