@@ -135,19 +135,6 @@
         res.status(500).json({ message: 'Hiba történt a bejelentkezés során!' });
       });
   });
-
-  //Felhasználó törlése
-  app.delete('/api/user/:id', (req, res) => {
-    const userId = req.params.id;
-  
-    User.findByIdAndRemove(userId).then(() => {
-      console.log('A felhasználó törlése sikeres volt!');
-      res.send('A felhasználó törlése sikeres volt!');
-    }).catch((err) => {
-      console.log('Hiba a felhasználó törlésekor:', err);
-      res.status(500).send('Hiba a felhasználó törlésekor!');
-    });
-  });
   
   //Felhasználóhoz tartozó adatokkal együtt
   app.delete('/api/user/:id/:email', (req, res) => {
