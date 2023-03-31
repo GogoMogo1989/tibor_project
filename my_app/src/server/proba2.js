@@ -136,7 +136,7 @@
       });
   });
   
-  //Felhasználóhoz tartozó adatokkal együtt
+  //Felhasználó és az ahoz tartozó adatok törlése
   app.delete('/api/user/:id/:email', (req, res) => {
     const id = req.params.id;
     const email = req.params.email;
