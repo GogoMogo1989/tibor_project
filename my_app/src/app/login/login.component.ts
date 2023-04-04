@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
           if (success) {
             console.log('Bejelentkezés sikeres!');
             if (success.isAdmin) { 
-              this.router.navigate(['/admin-main']);
+              this.router.navigate(['/admin-main/view-documents-admin']);
             }else{
               this.router.navigate(['/documentum-upload']);
             }

@@ -83,7 +83,7 @@
     DataModel.findByIdAndDelete(id)
       .then(() => {
         console.log('Az adat törlése sikeres volt!');
-        res.status(200).send('Az adat törlése sikeres volt!');
+        res.status(200).json({ message: 'Az adat törlése sikeres volt!' });
       })
       .catch((err) => {
         console.log('Hiba az adat törlésekor:', err);

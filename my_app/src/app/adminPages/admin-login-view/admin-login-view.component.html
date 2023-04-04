@@ -1,9 +1,13 @@
 <div class="adminView">
     <div class="list">
         <h2>Felhasználók listája</h2>
-        <ul>
-            <li *ngFor="let user of users">{{ user.email }}</li>
-        </ul>
+        <div class="data" *ngFor="let user of users">
+            <p>{{ user.email }}</p> 
+        
+            <button mat-raised-button color="primary" (click)="adminDeleteUserBTN(user._id, user.email)">
+                Törlés
+            </button>
+        </div>
     </div>
 </div>
 

@@ -5,6 +5,6 @@
     </div>
     <img [src]="data.file" alt="">
     <div class="button">
-        <button mat-raised-button color="primary" >Törlés</button>
+        <button mat-raised-button color="primary" (click)="adminDeleteImage(data._id)" >Törlés</button>
     </div>
 </div>
