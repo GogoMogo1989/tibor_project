@@ -10,7 +10,7 @@
   app.use(bodyParser.json({ limit: '500mb' }));
 
   // MongoDB kapcsolódás
-  const url = 'mongodb+srv://GogoMogo1989:12345@cluster0.v457sky.mongodb.net/Base64?retryWrites=true&w=majority';
+  const url = 'mongodb+srv://GogoMogo1989:Password12345@cluster0.v457sky.mongodb.net/Base64?retryWrites=true&w=majority';
   mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       console.log('A MongoDB adatbázishoz sikeresen kapcsolódva!');
@@ -38,7 +38,7 @@
     email:{
       type: String,
       required: true
-    }
+    },
   });
 
   const DataModel = mongoose.model('Data', dataSchema);
@@ -94,15 +94,16 @@
   //Regisztráció és a hozzátartozó séma
   const userSchema = new mongoose.Schema({
     email: String,
-    password: String
+    password: String,
+    isAdmin: Boolean
   });
 
   const User = mongoose.model('User', userSchema);
 
   app.post('/signup', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, isAdmin } = req.body;
 
-    const newUser = new User({ email, password });
+    const newUser = new User({ email, password, isAdmin });
 
     newUser.save()
       .then(() => {

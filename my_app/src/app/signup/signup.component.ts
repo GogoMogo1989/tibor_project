@@ -32,7 +32,8 @@ export class SignupComponent {
     ]),
     checkboxFormControl: new FormControl(false, [
       Validators.requiredTrue,
-    ])
+    ]),
+    isAdmin: new FormControl(false)
   });
 
   matcher = new MyErrorStateMatcher();
@@ -56,9 +57,10 @@ export class SignupComponent {
         this.signupForm.controls.checkboxFormControl.value &&
         this.signupForm.controls.password.value === this.signupForm.controls.confirmPassword.value) {
           const email = this.signupForm.controls.email.value;
-          const password = this.signupForm.controls.password.value; 
+          const password = this.signupForm.controls.password.value;
+          const isAdmin = this.signupForm.controls.isAdmin.value; 
           if (email !== null) {
-            this.userService.createUser(email ? email: undefined, password? password: undefined).subscribe(_response => {
+            this.userService.createUser(email ? email: undefined, password? password: undefined, isAdmin? isAdmin: undefined).subscribe(_response => {
               console.log('Sikeres felhasználó mentés a szerveren!');
               this.router.navigate(['/login']);
               alert('Sikeres regisztráció!');

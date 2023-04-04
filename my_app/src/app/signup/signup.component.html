@@ -38,5 +38,8 @@
   <mat-checkbox labelPositon="after" class="example-margin" formControlName="checkboxFormControl">
     Elfogadom a felhasználási feltételeket.
   </mat-checkbox>
+  <mat-checkbox formControlName="isAdmin">
+    Admin felhasználó
+  </mat-checkbox>
   <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid || !signupForm.controls.checkboxFormControl.value">Submit</button>
 </form>
