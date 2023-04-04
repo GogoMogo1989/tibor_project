@@ -118,9 +118,9 @@
 
   //Bejelentkezés
   app.post('/login', (req, res) => {
-    const {email, password } = req.body;
+    const {email, password} = req.body;
 
-    User.findOne({ email: email, password: password })
+    User.findOne({ email: email, password: password})
       .then(user => {
         if (!user) {
           console.log('Hibás felhasználó név vagy jelszó!');
@@ -128,7 +128,7 @@
         } else {
           console.log('Bejelentkezés sikeres!');
           console.log('A felhasználó _id-je:', user._id);
-          res.status(200).json({ message: 'Bejelentkezés sikeres!', userId: user._id });
+          res.status(200).json({ message: 'Bejelentkezés sikeres!', userId: user._id, isAdmin: user.isAdmin });
         }
       })
       .catch(err => {
@@ -158,6 +158,18 @@
       .catch((err) => {
         console.log('Hiba a felhasználó törlésekor:', err);
         res.status(500).send('Hiba a felhasználó törlésekor!');
+      });
+  });
+
+  // Felhasználók lekérdezése
+  app.get('/users', (req, res) => {
+    User.find({})
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: 'Hiba történt a felhasználók lekérdezésekor!' });
       });
   });
 

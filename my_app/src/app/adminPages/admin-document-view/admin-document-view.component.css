@@ -1,0 +1,22 @@
+img{
+    width: 30%;
+}
+
+.documentViewAdmin{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 70px
+}
+
+.p{
+    width: 30%;
+    height: 40%;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    width: 30%;
+}

@@ -1,5 +1,5 @@
 .example-spacer {
-    flex: 1 1 auto;
+    flex: 0.85  auto;
   }
   .example-icon{
     visibility: hidden

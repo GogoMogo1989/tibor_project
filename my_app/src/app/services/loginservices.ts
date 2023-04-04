@@ -36,6 +36,8 @@ export class AuthService {
     return this.http.post<any>('http://localhost:3000/login', { email, password })
       .pipe(
         map(response => {
+          const isAdmin = response.isAdmin;
+          console.log(isAdmin)
           const userId = response.userId;
           localStorage.setItem('_id', userId);
           localStorage.setItem('currentUser', JSON.stringify(response));

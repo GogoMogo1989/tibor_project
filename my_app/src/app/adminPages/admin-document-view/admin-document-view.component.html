@@ -1,1 +1,10 @@
-<p>admin-document-view works!</p>
+<div class="documentViewAdmin" *ngFor="let data of userData">
+    <div class="p">
+        <p>{{data.email}}</p>
+        <p>{{data.option}}</p>
+    </div>
+    <img [src]="data.file" alt="">
+    <div class="button">
+        <button mat-raised-button color="primary" >Törlés</button>
+    </div>
+</div>

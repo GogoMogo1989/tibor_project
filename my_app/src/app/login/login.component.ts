@@ -24,7 +24,11 @@ export class LoginComponent implements OnInit {
         success => {
           if (success) {
             console.log('Bejelentkezés sikeres!');
-            this.router.navigate(['/documentum-upload']);
+            if (success.isAdmin) { 
+              this.router.navigate(['/admin-main']);
+            }else{
+              this.router.navigate(['/documentum-upload']);
+            }
           } else {
             console.log('Hibás felhasználó név vagy jelszó!');
           }
