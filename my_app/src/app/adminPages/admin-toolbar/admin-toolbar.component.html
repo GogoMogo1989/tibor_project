@@ -1,0 +1,28 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()">
+     <mat-icon>menu</mat-icon>
+   </button>
+   <span class="example-spacer"></span>
+   <button mat-button class="button">
+    <span  routerLink="/admin-main/view-documents-admin">View Documents</span>
+  </button>
+   <button mat-button class="button">
+     <span  routerLink="/admin-main/view-login-admin">View Login</span>
+   </button>
+  <button mat-button class="button">
+    <span routerLink="/login" >{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav"  mode="side">
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span  routerLink="/admin-main/view-documents-admin">View Documents</span>
+    </button>
+    <button mat-button class="button2" (click)="drawer.toggle()">
+     <span routerLink="/admin-main/view-login-admin">View Logins</span>
+    </button>
+    <button mat-button class="button2">
+        <span routerLink="/login" >{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
+      </button>
+  </mat-drawer>
+</mat-drawer-container>

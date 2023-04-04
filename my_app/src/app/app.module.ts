@@ -22,6 +22,10 @@ import { MyErrorStateMatcher, SignupComponent } from './signup/signup.component'
 import { ErrorStateMatcher } from '@angular/material/core';
 import { LoginComponent } from './login/login.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { AdminMainComponent } from './adminPages/admin-main/admin-main.component';
+import { AdminDocumentViewComponent } from './adminPages/admin-document-view/admin-document-view.component';
+import { AdminLoginViewComponent } from './adminPages/admin-login-view/admin-login-view.component';
+import { AdminToolbarComponent } from './adminPages/admin-toolbar/admin-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     LoginComponent,
     SignupComponent,
     DeleteUserComponent,
+    AdminMainComponent,
+    AdminDocumentViewComponent,
+    AdminLoginViewComponent,
+    AdminToolbarComponent,
   ],
   imports: [
     MatSelectModule,
