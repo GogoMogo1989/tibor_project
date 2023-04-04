@@ -55,6 +55,7 @@ export class ViewDocumentsComponent implements OnInit {
         res => {
           console.log(res);
           this.imageDataArray = this.imageDataArray.filter(image => image.id !== id); // kép eltávolítása az imageDataArray-ból
+          this.loadData()
         },
         error => console.log(error)
       );

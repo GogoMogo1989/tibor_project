@@ -26,6 +26,7 @@ export class AdminLoginViewComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
+          this.ngOnInit()
         },
         (error) => {
           console.error(error);
