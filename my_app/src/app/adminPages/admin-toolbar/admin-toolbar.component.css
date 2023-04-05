@@ -1,33 +1,33 @@
 .example-spacer {
-    flex: 0.85  auto;
-  }
+    flex: 0.7  auto;
+}
+.example-icon{
+  visibility: hidden
+}
+mat-toolbar{
+  position: fixed;
+  top:0;
+  z-index: 1000;
+}
+
+@media only screen and (max-width: 600px) {
   .example-icon{
-    visibility: hidden
+  visibility: visible;
   }
-  mat-toolbar{
-    position: fixed;
-    top:0;
-    z-index: 1000;
+  .button{
+  visibility: hidden;
   }
-  
-  @media only screen and (max-width: 600px) {
-   .example-icon{
-    visibility: visible;
-   }
-   .button{
-    visibility: hidden;
-   }
-  }
-  
-  .example-container {
-    visibility: hidden;
-    width: 50%;
-    height: 150px;
-    top:56px;
-    position: fixed;
-  }
-  
-  .button2{
-    width: 100%;
-    height: 50px;
-  }
+}
+
+.example-container {
+  visibility: hidden;
+  width: 50%;
+  height: 150px;
+  top:56px;
+  position: fixed;
+}
+
+.button2{
+  width: 100%;
+  height: 50px;
+}
