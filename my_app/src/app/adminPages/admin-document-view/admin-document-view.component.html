@@ -1,3 +1,10 @@
+<form action="" class="searchbar">
+    <mat-form-field appearance="outline" >
+        <mat-label>Felhasználók keresése:</mat-label>
+        <input matInput type="text" id="users" name="users">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Keresés</button>
+</form>
 <div class="documentViewAdmin" *ngFor="let data of userData">
     <div class="p">
         <p>{{data.email}}</p>

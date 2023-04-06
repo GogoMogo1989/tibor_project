@@ -27,17 +27,17 @@ export class AdminDocumentViewComponent implements OnInit{
       );
     }
 
-    adminDeleteImage(id: string) {
-      const confirmDelete = confirm('Biztos töröli a felhasználó adatát?');
-      if(confirmDelete)
-        this.http.delete(`http://localhost:3000/api/data/${id}`).subscribe(
-            (response) => {
-              console.log(response);
-              this.getUploadedFiles();
-            },
-            (error) => {
-              console.log('Error deleting image', error);
-            }
-          );
-      }
+  adminDeleteImage(id: string) {
+    const confirmDelete = confirm('Biztos töröli a felhasználó adatát?');
+    if(confirmDelete)
+      this.http.delete(`http://localhost:3000/api/data/${id}`).subscribe(
+          (response) => {
+            console.log(response);
+            this.getUploadedFiles();
+          },
+          (error) => {
+            console.log('Error deleting image', error);
+          }
+        );
+    }
 }
