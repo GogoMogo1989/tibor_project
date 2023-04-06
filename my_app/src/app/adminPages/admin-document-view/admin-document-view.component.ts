@@ -51,9 +51,9 @@ export class AdminDocumentViewComponent implements OnInit{
         (data) => {
           if (this.selectedOption === 'Összes') {
             this.filteredUserData = data;
-        } else {
-            this.filteredUserData = data.filter(item => item.option === this.selectedOption);
-        }
+          } else {
+              this.filteredUserData = data.filter(item => item.option === this.selectedOption);
+          }
         },
         (error) => {
           console.log('Error searching users', error);
