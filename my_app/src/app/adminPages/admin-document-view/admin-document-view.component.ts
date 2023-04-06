@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class AdminDocumentViewComponent implements OnInit{
 
   userData: any[] = [];
+  filteredUserData: any[] = [];
+  searchTerm: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -20,24 +22,41 @@ export class AdminDocumentViewComponent implements OnInit{
     this.http.get<any[]>('http://localhost:3000/api/data').subscribe(
       (data) => {
         this.userData = data;
+        this.filteredUserData = data;
       },
       (error) => {
-          console.log('Error fetching uploaded files', error);
-        }
-      );
-    }
+        console.log('Error fetching uploaded files', error);
+      }
+    );
+  }
 
   adminDeleteImage(id: string) {
     const confirmDelete = confirm('Biztos töröli a felhasználó adatát?');
     if(confirmDelete)
       this.http.delete(`http://localhost:3000/api/data/${id}`).subscribe(
-          (response) => {
-            console.log(response);
-            this.getUploadedFiles();
-          },
-          (error) => {
-            console.log('Error deleting image', error);
-          }
-        );
+        (response) => {
+          console.log(response);
+          this.getUploadedFiles();
+        },
+        (error) => {
+          console.log('Error deleting image', error);
+        }
+      );
+  }
+
+  searchUsers() {
+    if(this.searchTerm){
+      this.http.get<any[]>(`http://localhost:3000/api/data/search/${this.searchTerm}`).subscribe(
+        (data) => {
+          this.filteredUserData = data;
+          this.userData = this.filteredUserData
+        },
+        (error) => {
+          console.log('Error searching users', error);
+        }
+      );
+    }else{
+      this.getUploadedFiles()
     }
+  }
 }

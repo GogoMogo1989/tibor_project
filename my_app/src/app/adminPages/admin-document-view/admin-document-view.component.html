@@ -1,11 +1,11 @@
 <form action="" class="searchbar">
     <mat-form-field appearance="outline" >
-        <mat-label>Felhasználók keresése:</mat-label>
-        <input matInput type="text" id="users" name="users">
+        <mat-label>Keresés email alapján:</mat-label>
+        <input matInput type="text" [(ngModel)]="searchTerm" id="users" name="users">
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Keresés</button>
+    <button mat-raised-button color="primary" type="button" (click)="searchUsers()">Keresés</button>
 </form>
-<div class="documentViewAdmin" *ngFor="let data of userData">
+<div class="documentViewAdmin" *ngFor="let data of filteredUserData">
     <div class="p">
         <p>{{data.email}}</p>
         <p>{{data.option}}</p>
