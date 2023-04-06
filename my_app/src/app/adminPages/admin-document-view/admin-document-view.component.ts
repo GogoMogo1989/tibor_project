@@ -49,7 +49,6 @@ export class AdminDocumentViewComponent implements OnInit{
       this.http.get<any[]>(`http://localhost:3000/api/data/search/${this.searchTerm}`).subscribe(
         (data) => {
           this.filteredUserData = data;
-          this.userData = this.filteredUserData
         },
         (error) => {
           console.log('Error searching users', error);
