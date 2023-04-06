@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+.selected{
+    width:212px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 img{
     width: 30%;
 }

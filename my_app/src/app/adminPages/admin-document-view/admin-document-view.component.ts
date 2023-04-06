@@ -49,8 +49,11 @@ export class AdminDocumentViewComponent implements OnInit{
     if(this.searchTerm){
       this.http.get<any[]>(`http://localhost:3000/api/data/search/${this.searchTerm}`).subscribe(
         (data) => {
-          this.filteredUserData = data;
-          console.log(this.filteredUserData)
+          if (this.selectedOption === 'Összes') {
+            this.filteredUserData = data;
+        } else {
+            this.filteredUserData = data.filter(item => item.option === this.selectedOption);
+        }
         },
         (error) => {
           console.log('Error searching users', error);

@@ -174,7 +174,7 @@ app.get('/users', (req, res) => {
 });
 
 //Itt keressük a felhasználókat az admin felületen
-app.get('/api/data/search/:searchTerm/', (req, res) => {
+app.get('/api/data/search/:searchTerm', (req, res) => {
   const searchTerm = req.params.searchTerm;
   DataModel.find({ email: searchTerm})
     .then((data) => {

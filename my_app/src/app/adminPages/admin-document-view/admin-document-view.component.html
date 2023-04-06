@@ -3,6 +3,12 @@
         <mat-label>Keresés email alapján:</mat-label>
         <input matInput type="text" [(ngModel)]="searchTerm" id="users" name="users">
     </mat-form-field>
+    <mat-select [(ngModel)]="selectedOption" name="selectedOption" placeholder="Típus:" class="selected">
+        <mat-option value="Összes">Összes</mat-option>
+        <mat-option value="Számla">Számla</mat-option>
+        <mat-option value="Számlakivonat">Számlakivonat</mat-option>
+        <mat-option value="Egyéb">Egyéb</mat-option>
+    </mat-select>
     <button mat-raised-button color="primary" type="button" (click)="searchUsers()">Keresés</button>
 </form>
 <div class="documentViewAdmin" *ngFor="let data of filteredUserData">
