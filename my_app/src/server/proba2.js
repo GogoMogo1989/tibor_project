@@ -178,7 +178,7 @@ app.get('/api/data/search/:searchTerm', (req, res) => {
   const searchTerm = req.params.searchTerm;
   DataModel.find({ email: searchTerm})
     .then((data) => {
-      console.log(`Az adatok lekérdezése sikeres volt a következő keresési kifejezéssel: ${searchTerm}`);
+      console.log(`Az adatok lekérdezése sikeres volt ezzel az email-címmel: ${searchTerm}`);
       res.send(data);
     })
     .catch((err) => {
