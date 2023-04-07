@@ -46,28 +46,30 @@ export class AdminDocumentViewComponent implements OnInit{
   }
 
   searchUsers() {
-    if (this.searchTerm && this.selectedOption !== 'Összes') { //Van érték az email keresőben, és az option nem egyenlő az összesel
+    if (this.searchTerm && this.selectedOption !== 'Összes') { //Van érték az email keresőben, és az option nem egyenlő az Összes-sel
       this.http.get<any[]>(`http://localhost:3000/api/data/search/${this.searchTerm}`).subscribe(
         (data) => {
-          this.filteredUserData = data.filter(item => item.option === this.selectedOption); //akkor az option értékkel szűrje az adatokat a http://localhost:3000/api/data/search/${this.searchTerm} útvonalon keresztül nyert adatokakl
-        },
-        (error) => {
-          console.log('Error searching users', error);
+          this.filteredUserData = data.filter(item => item.option === this.selectedOption); 
         }
       );
-    } else { //Ha nincs érték az email keresőben
-      this.http.get<any[]>(`http://localhost:3000/api/data`).subscribe( 
+    } else if(this.searchTerm && this.selectedOption ==='Összes'){ //Van érték az email keresőben, és az option értéke egyenlő az Összes-sel
+      this.http.get<any[]>(`http://localhost:3000/api/data/search/${this.searchTerm}`).subscribe(
         (data) => {
-          if (this.selectedOption === 'Összes') { //és az option érték egyenlő az Összessel
-            this.filteredUserData = data; //akkor az http://localhost:3000/api/data végpontról szedett adatokkal tölti fel a filterUserData-t
-          } else {
-            this.filteredUserData = data.filter(item => item.option === this.selectedOption); //ha az option érték nem egyenlő az Összes, akkor szűrje le az option értékével az adatokat
-          }
-        },
-        (error) => {
-          console.log('Error searching users', error);
+        this.filteredUserData = data
         }
-      );
+      )
+    } else if(!this.searchTerm && this.selectedOption ==="Összes"){ //Nincs érték az email mezőben, és az option értéke egyenlő Összes-sel
+      this.http.get<any[]>(`http://localhost:3000/api/data`).subscribe(
+        (data) => {
+          this.filteredUserData = data
+        }
+      )
+    } else {
+      this.http.get<any[]>(`http://localhost:3000/api/data`).subscribe( //Nincs érték az email mezőben, és az option érték nem egyenlő az Összes-sel
+        (data) => {
+          this.filteredUserData = data.filter(item => item.option ===this.selectedOption)
+        }
+      )
     }
   }
 }
