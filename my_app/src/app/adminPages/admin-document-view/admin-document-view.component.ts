@@ -46,21 +46,28 @@ export class AdminDocumentViewComponent implements OnInit{
   }
 
   searchUsers() {
-    if(this.searchTerm){
+    if (this.searchTerm && this.selectedOption !== 'Összes') { //Van érték az email keresőben, és az option nem egyenlő az összesel
       this.http.get<any[]>(`http://localhost:3000/api/data/search/${this.searchTerm}`).subscribe(
         (data) => {
-          if (this.selectedOption === 'Összes') {
-            this.filteredUserData = data;
+          this.filteredUserData = data.filter(item => item.option === this.selectedOption); //akkor az option értékkel szűrje az adatokat a http://localhost:3000/api/data/search/${this.searchTerm} útvonalon keresztül nyert adatokakl
+        },
+        (error) => {
+          console.log('Error searching users', error);
+        }
+      );
+    } else { //Ha nincs érték az email keresőben
+      this.http.get<any[]>(`http://localhost:3000/api/data`).subscribe( 
+        (data) => {
+          if (this.selectedOption === 'Összes') { //és az option érték egyenlő az Összessel
+            this.filteredUserData = data; //akkor az http://localhost:3000/api/data végpontról szedett adatokkal tölti fel a filterUserData-t
           } else {
-              this.filteredUserData = data.filter(item => item.option === this.selectedOption);
+            this.filteredUserData = data.filter(item => item.option === this.selectedOption); //ha az option érték nem egyenlő az Összes, akkor szűrje le az option értékével az adatokat
           }
         },
         (error) => {
           console.log('Error searching users', error);
         }
       );
-    }else{
-      this.getUploadedFiles()
     }
   }
 }
