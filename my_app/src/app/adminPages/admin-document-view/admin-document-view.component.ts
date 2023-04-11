@@ -64,7 +64,7 @@ export class AdminDocumentViewComponent implements OnInit{
           this.filteredUserData = data
         }
       )
-    } else {
+    } else { //!this.searchTerm && this.selectedOption !== 'Összes'
       this.http.get<any[]>(`http://localhost:3000/api/data`).subscribe( //Nincs érték az email mezőben, és az option érték nem egyenlő az Összes-sel
         (data) => {
           this.filteredUserData = data.filter(item => item.option ===this.selectedOption)
