@@ -137,7 +137,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-//Felhasználó és az ahoz tartozó adatok törlése
+//Felhasználó és az ahhoz tartozó adatok törlése
 app.delete('/api/user/:id/:email', (req, res) => {
   const id = req.params.id;
   const email = req.params.email;
