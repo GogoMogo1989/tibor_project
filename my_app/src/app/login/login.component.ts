@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
             if (success.isAdmin) { 
               this.router.navigate(['/admin-main/view-documents-admin']);
             }else{
-              this.router.navigate(['/documentum-upload']);
+              this.router.navigate(['/documentum-upload-choice']);
             }
           } else {
             console.log('Hibás felhasználó név vagy jelszó!');

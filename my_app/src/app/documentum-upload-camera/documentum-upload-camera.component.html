@@ -1,0 +1,18 @@
+<div class="webcam-container">
+    <div class="webcam-preview">
+      <webcam
+        [trigger]="triggerObservable"
+        (imageCapture)="handleImageCapture($event)"
+        (initError)="handleInitError($event)"
+        [videoOptions]="videoOptions"
+      ></webcam>
+    </div>
+    <div class="webcam-controls">
+        <select id="select-option" [(ngModel)]="optionSelected">
+            <option value="Számla">Számla</option>
+            <option value="Számlakivonat">Számlakivonat</option>
+            <option value="Egyéb">Egyéb</option>
+        </select>
+      <button (click)="webcamImageCapture()">Capture Image</button>
+    </div>
+</div>

@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { WebcamModule} from 'ngx-webcam';
 
 import { MyErrorStateMatcher, SignupComponent } from './signup/signup.component';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -26,6 +27,8 @@ import { AdminMainComponent } from './adminPages/admin-main/admin-main.component
 import { AdminDocumentViewComponent } from './adminPages/admin-document-view/admin-document-view.component';
 import { AdminLoginViewComponent } from './adminPages/admin-login-view/admin-login-view.component';
 import { AdminToolbarComponent } from './adminPages/admin-toolbar/admin-toolbar.component';
+import { DocumentumUploadChoiceComponent } from './documentum-upload-choice/documentum-upload-choice.component';
+import { DocumentumUploadCameraComponent } from './documentum-upload-camera/documentum-upload-camera.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { AdminToolbarComponent } from './adminPages/admin-toolbar/admin-toolbar.
     AdminDocumentViewComponent,
     AdminLoginViewComponent,
     AdminToolbarComponent,
+    DocumentumUploadChoiceComponent,
+    DocumentumUploadCameraComponent,
   ],
   imports: [
     MatSelectModule,
@@ -55,7 +60,8 @@ import { AdminToolbarComponent } from './adminPages/admin-toolbar/admin-toolbar.
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    WebcamModule
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher }

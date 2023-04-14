@@ -8,7 +8,9 @@ import { ViewDocumentsComponent } from './view-documents/view-documents.componen
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { AdminMainComponent } from './adminPages/admin-main/admin-main.component';
 import { AdminDocumentViewComponent } from './adminPages/admin-document-view/admin-document-view.component';
-import {AdminLoginViewComponent} from './adminPages/admin-login-view/admin-login-view.component'
+import {AdminLoginViewComponent} from './adminPages/admin-login-view/admin-login-view.component';
+import { DocumentumUploadChoiceComponent } from './documentum-upload-choice/documentum-upload-choice.component';
+import { DocumentumUploadCameraComponent } from './documentum-upload-camera/documentum-upload-camera.component';
 
 const routes: Routes = [
     {path: '', component: LoginComponent},
@@ -26,7 +28,8 @@ const routes: Routes = [
         {path: 'login', component: LoginComponent},
       ]
     },
-  
+    {path: 'documentum-upload-choice', component: DocumentumUploadChoiceComponent},
+    {path: 'documentum-upload-camera', component: DocumentumUploadCameraComponent}
 ];
 
 @NgModule({
