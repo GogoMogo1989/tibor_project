@@ -5,3 +5,7 @@
     padding-top: 250px;
     flex-direction: column;
 }
+
+button{
+    margin-top: 10px;
+}

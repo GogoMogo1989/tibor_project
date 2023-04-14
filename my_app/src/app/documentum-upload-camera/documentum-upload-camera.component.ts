@@ -68,6 +68,7 @@ export class DocumentumUploadCameraComponent {
     console.log(event)
     if (!event || !event.imageAsDataUrl || !this.optionSelected || !email) {
       console.error('Hiányzó adatok a kép elküldése során!');
+      alert("Hiányzó adatok a kép elküldése során!")
       return;
     }
     this.webcamImagesServices.sendImage(event.imageAsDataUrl, this.optionSelected, email).subscribe(

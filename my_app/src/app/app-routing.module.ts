@@ -22,14 +22,15 @@ const routes: Routes = [
     {
       path: 'admin-main', 
       component: AdminMainComponent,
+      canActivate: [AuthGuard],
       children: [  
-        {path: 'view-login-admin', component: AdminLoginViewComponent},
-        {path: 'view-documents-admin', component: AdminDocumentViewComponent},
-        {path: 'login', component: LoginComponent},
+        {path: 'view-login-admin', component: AdminLoginViewComponent, canActivate: [AuthGuard]},
+        {path: 'view-documents-admin', component: AdminDocumentViewComponent, canActivate: [AuthGuard]},
+        {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
       ]
     },
-    {path: 'documentum-upload-choice', component: DocumentumUploadChoiceComponent},
-    {path: 'documentum-upload-camera', component: DocumentumUploadCameraComponent}
+    {path: 'documentum-upload-choice', component: DocumentumUploadChoiceComponent, canActivate: [AuthGuard]},
+    {path: 'documentum-upload-camera', component: DocumentumUploadCameraComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
