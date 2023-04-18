@@ -20,7 +20,6 @@ server.on('connection', (socket) => {
   // Eseménykezelő az üzenetek fogadására a kliensektől
   socket.on('message', (message) => {
     console.log('Received message:', message);
-
     // Az üzenet továbbítása az összes többi kliensnek, beleértve az eredeti küldőt is
     for (const client of clients) {
       // Az üzenet küldése a feliratkozóknak (subscribers), beleértve az eredeti küldőt is
@@ -34,7 +33,6 @@ server.on('connection', (socket) => {
   // Eseménykezelő a kliens lecsatlakozására
   socket.on('close', () => {
     console.log('Client disconnected');
-
     // Kliens eltávolítása a tárolóból
     clients.delete(socket);
   });
