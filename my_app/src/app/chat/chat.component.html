@@ -8,7 +8,7 @@
   <div>
     <h1>Üzenetek</h1>
     <ul>
-      <li *ngFor="let message of messages">{{message.data.content}} - {{message.data.email}}</li>
+      <li *ngFor="let message of messages">{{message.email}} - {{message.content}}</li>
     </ul>
   </div>
 </div>

@@ -42,6 +42,7 @@ export class ChatAdminComponent {
       const message: ChatMessage = { content: this.adminMessage, email: this.authService.getEmail() };
       this.socket.next(message);
       console.log('Sent message:', message);
+      this.adminMessage=""
     }
   }
 }

@@ -20,12 +20,13 @@ server.on('connection', (socket) => {
   // Eseménykezelő az üzenetek fogadására a kliensektől
   socket.on('message', (message) => {
     console.log('Received message:', message);
-  
+
     // Az üzenet továbbítása az összes többi kliensnek, beleértve az eredeti küldőt is
     for (const client of clients) {
       // Az üzenet küldése a feliratkozóknak (subscribers), beleértve az eredeti küldőt is
       if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify(message));
+        // Az üzenet JSON formátumban elküldése
+        client.send(JSON.stringify(JSON.parse(message)));
       }
     }
   });

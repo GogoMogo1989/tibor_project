@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { WebSocketSubject } from 'rxjs/webSocket';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { AuthService } from '../services/loginservices';
 
 interface ChatMessage {
-  type: string;
-  data: {
     content: string;
     email: string;
-  };
 }
 
 @Component({
@@ -17,14 +14,16 @@ interface ChatMessage {
 })
 
 export class ChatComponent {
-  userMessage: string = '';
-  messages: ChatMessage[] = [];
-  socket: WebSocketSubject<ChatMessage>;
+  private socket!: WebSocketSubject<ChatMessage>; // Az üzenetek típusa most ChatMessage
+  userMessage!: string; // Az admin üzenet változója
+  messages: ChatMessage[] = []; // Az üzenetek tömbje típusa ChatMessage
 
-  constructor(private authService: AuthService) {
-    this.socket = new WebSocketSubject<ChatMessage>('ws://localhost:8080');
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(){
+    this.socket = webSocket<ChatMessage>('ws://localhost:8080'); // Az üzenetek típusa ChatMessage
     this.socket.subscribe(
-      (message: ChatMessage) => {
+      (message: ChatMessage) => { // Az üzenetek típusa ChatMessage, ellenőrizni, hogy az üzenet érvényes JSON,és emiatt nincs szükség JSON.parse()-ra, mivel a típus már specifikált
         this.messages.push(message);
         console.log('Received message:', message);
       },
@@ -37,17 +36,14 @@ export class ChatComponent {
     );
   }
 
-  sendUserMessage() {
+  sendUserMessage() { 
     if (this.userMessage && this.authService.getEmail()) {
-      const message: ChatMessage = {
-        type: 'message',
-        data: {
-          content: this.userMessage,
-          email: this.authService.getEmail()
-        }
-      };
-      this.socket.next(message) ;
+      console.log(this.userMessage)
+      console.log(this.authService.getEmail())
+      const message: ChatMessage = { content: this.userMessage, email: this.authService.getEmail() };
+      this.socket.next(message);
       console.log('Sent message:', message);
+      this.userMessage="";
     }
   }
 }
