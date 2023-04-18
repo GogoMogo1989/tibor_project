@@ -16,6 +16,9 @@
     <span routerLink="/signup">Sign Up</span>
   </button>
   <button mat-button class="button">
+    <span routerLink="/chat">Chat</span>
+  </button>
+  <button mat-button class="button">
     <span routerLink="/login" >{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
   </button>
 </mat-toolbar>
@@ -35,6 +38,9 @@
     </button>
     <button mat-button class="button2" (click)="drawer.toggle()">
       <span  routerLink="/delete-user">Delete Registry</span>
+    </button> 
+    <button mat-button class="button2" (click)="drawer.toggle()">
+      <span  routerLink="/chat">Chat</span>
     </button> 
   </mat-drawer>
 </mat-drawer-container>

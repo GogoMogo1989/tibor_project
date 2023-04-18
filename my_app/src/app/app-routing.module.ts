@@ -11,6 +11,8 @@ import { AdminDocumentViewComponent } from './adminPages/admin-document-view/adm
 import {AdminLoginViewComponent} from './adminPages/admin-login-view/admin-login-view.component';
 import { DocumentumUploadChoiceComponent } from './documentum-upload-choice/documentum-upload-choice.component';
 import { DocumentumUploadCameraComponent } from './documentum-upload-camera/documentum-upload-camera.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatAdminComponent } from './adminPages/chat-admin/chat-admin.component';
 
 const routes: Routes = [
     {path: '', component: LoginComponent},
@@ -27,10 +29,12 @@ const routes: Routes = [
         {path: 'view-login-admin', component: AdminLoginViewComponent, canActivate: [AuthGuard]},
         {path: 'view-documents-admin', component: AdminDocumentViewComponent, canActivate: [AuthGuard]},
         {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
+        {path: 'chat-admin', component: ChatAdminComponent, canActivate: [AuthGuard]}
       ]
     },
     {path: 'documentum-upload-choice', component: DocumentumUploadChoiceComponent, canActivate: [AuthGuard]},
-    {path: 'documentum-upload-camera', component: DocumentumUploadCameraComponent, canActivate: [AuthGuard]}
+    {path: 'documentum-upload-camera', component: DocumentumUploadCameraComponent, canActivate: [AuthGuard]},
+    {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

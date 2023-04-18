@@ -1,0 +1,14 @@
+<div class="chat">
+  <div>
+    <h1>Adminisztrátor</h1>
+    <input [(ngModel)]="adminMessage" (keyup.enter)="sendAdminMessage()" placeholder="Üzenet">
+    <button (click)="sendAdminMessage()">Küldés</button>
+  </div>
+
+  <div>
+    <h1>Üzenetek</h1>
+    <ul>
+     <li *ngFor="let message of messages">{{message.email}}:{{message.content}}</li>
+    </ul>
+  </div>
+</div>

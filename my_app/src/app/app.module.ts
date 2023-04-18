@@ -29,6 +29,8 @@ import { AdminLoginViewComponent } from './adminPages/admin-login-view/admin-log
 import { AdminToolbarComponent } from './adminPages/admin-toolbar/admin-toolbar.component';
 import { DocumentumUploadChoiceComponent } from './documentum-upload-choice/documentum-upload-choice.component';
 import { DocumentumUploadCameraComponent } from './documentum-upload-camera/documentum-upload-camera.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatAdminComponent } from './adminPages/chat-admin/chat-admin.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { DocumentumUploadCameraComponent } from './documentum-upload-camera/docu
     AdminToolbarComponent,
     DocumentumUploadChoiceComponent,
     DocumentumUploadCameraComponent,
+    ChatComponent,
+    ChatAdminComponent,
   ],
   imports: [
     MatSelectModule,
