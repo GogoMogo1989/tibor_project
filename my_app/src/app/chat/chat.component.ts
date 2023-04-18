@@ -46,7 +46,7 @@ export class ChatComponent {
           email: this.authService.getEmail()
         }
       };
-      this.socket.next(message);
+      this.socket.next(message) ;
       console.log('Sent message:', message);
     }
   }
