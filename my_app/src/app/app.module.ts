@@ -68,7 +68,7 @@ import { ChatAdminComponent } from './adminPages/chat-admin/chat-admin.component
     WebcamModule
   ],
   providers: [
-    { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher }
+    { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher },
   ],
   bootstrap: [AppComponent]
 })
