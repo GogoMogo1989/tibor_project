@@ -11,14 +11,14 @@ export class AdminToolbarComponent implements OnInit {
   socket!: WebSocketSubject<any>;
 
   ngOnInit() {
-    this.socket = webSocket('ws://localhost:8080');
+    this.socket = webSocket('ws://localhost:8080'); //Itt ellenőrizzük, hogy a websocket array-ban van- érték
     this.socket.subscribe(() => {
       this.isChatUnread = true;
     });
   }
 
-  markAsRead() {
+  markAsRead() { //Gombnyomásra a isChatUnread false lesz, tehát láttuk az üzenet, így az eredeti színe lesz a gombnak
     this.isChatUnread = false;
   }
-  
+
 }
