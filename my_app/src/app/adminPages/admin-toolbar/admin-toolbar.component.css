@@ -32,6 +32,6 @@ mat-toolbar{
   height: 50px;
 }
 
-.has-unread-messages {
+.chat-unread {
   color: red;
 }

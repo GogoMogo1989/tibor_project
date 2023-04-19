@@ -1,5 +1,6 @@
   import { Component } from '@angular/core';
   import { AuthService } from '../services/loginservices';
+  import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
   @Component({
     selector: 'app-toolbar',
@@ -12,4 +13,20 @@
     isLoggedIn(): boolean {
       return this.authService.isLoggedIn();
     }
+
+    isChatUnread: boolean = false;
+    socket!: WebSocketSubject<any>;
+  
+    ngOnInit() {
+      this.socket = webSocket('ws://localhost:8080');
+      this.socket.subscribe(() => {
+        this.isChatUnread = true;
+      });
+    }
+
+    markAsRead() {
+      this.isChatUnread = false;
+    }
+  
+    
   }

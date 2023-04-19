@@ -10,7 +10,7 @@
      <span  routerLink="/admin-main/view-login-admin">View Users</span>
    </button>
    <button mat-button class="button">
-    <span routerLink="/admin-main/chat-admin" >Chat</span>
+    <span routerLink="/admin-main/chat-admin" [ngClass]="{'chat-unread': isChatUnread}" (click)="markAsRead()" >Chat</span>
   </button>
   <button mat-button class="button">
     <span routerLink="/login" >Logout</span>
