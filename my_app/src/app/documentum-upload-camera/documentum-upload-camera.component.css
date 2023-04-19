@@ -13,6 +13,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 5px;
+    object-fit: cover;
 }
 
 button{
@@ -23,6 +24,5 @@ button{
     border-style: solid;
     border-color: red;
     margin-top: 100px;
-    
 }
 
