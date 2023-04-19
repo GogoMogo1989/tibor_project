@@ -4,4 +4,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column-reverse;
+}
+
+li{
+   list-style-type: none;
+   font-size: 20px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+
+.message{
+    height:20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.message-view{
+    height: 80%;
+    width: 80%;
+    border-style: solid;
+    border-color: black;
+    margin-top: 70px;
+    margin-bottom:20px;
+    background-color: #eeeeee;
+}
+
+button{
+    margin-top: 20px;
 }

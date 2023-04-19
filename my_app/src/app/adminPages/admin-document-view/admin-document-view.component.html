@@ -9,7 +9,7 @@
         <mat-option value="Számlakivonat">Számlakivonat</mat-option>
         <mat-option value="Egyéb">Egyéb</mat-option>
     </mat-select>
-    <button mat-raised-button color="primary" type="button" (click)="searchUsers()">Keresés</button>
+    <button class="searchBtn"mat-raised-button color="primary" type="button" (click)="searchUsers()">Keresés</button>
 </form>
 <div class="documentViewAdmin" *ngFor="let data of filteredUserData">
     <div class="p">

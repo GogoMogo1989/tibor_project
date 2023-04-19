@@ -12,9 +12,17 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 5px;
 }
 
 button{
     margin-top:5px
+}
+
+.webcam-preview{
+    border-style: solid;
+    border-color: red;
+    margin-top: 100px;
+    
 }
 

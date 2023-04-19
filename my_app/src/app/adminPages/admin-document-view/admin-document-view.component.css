@@ -32,6 +32,11 @@ img{
     display: flex;
     justify-content: center;
     width: 30%;
+    z-index: -1;
+}
+
+.searchBtn{
+    z-index: -1;
 }
 
 @media only screen and (max-width: 600px) {

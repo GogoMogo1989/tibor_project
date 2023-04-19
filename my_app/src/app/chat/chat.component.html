@@ -1,12 +1,10 @@
 <div class="chat">
-  <div>
-    <h1>Felhasználó</h1>
-    <input [(ngModel)]="userMessage" (keyup.enter)="sendUserMessage()" placeholder="Üzenet">
-    <button (click)="sendUserMessage()">Küldés</button>
+  <div class="message">
+    <input matInput type="text" [(ngModel)]="userMessage" (keyup.enter)="sendUserMessage()">
+    <button  mat-raised-button color="primary"  (click)="sendUserMessage()">Küldés</button>
   </div>
 
-  <div>
-    <h1>Üzenetek</h1>
+  <div class="message-view">
     <ul>
       <li *ngFor="let message of messages">{{message.email}} - {{message.content}}</li>
     </ul>
