@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { AuthService } from 'src/app/services/loginservices';
 
@@ -12,7 +12,7 @@ interface ChatMessage {
   templateUrl: './chat-admin.component.html',
   styleUrls: ['./chat-admin.component.css']
 })
-export class ChatAdminComponent {
+export class ChatAdminComponent{
   private socket!: WebSocketSubject<ChatMessage>; // Az üzenetek típusa most ChatMessage
   adminMessage!: string; // Az admin üzenet változója
   messages: ChatMessage[] = []; // Az üzenetek tömbje típusa ChatMessage
@@ -32,9 +32,8 @@ export class ChatAdminComponent {
       () => {
         console.log('WebSocket closed');
       }
-    );
+    ); 
   }
-
   sendAdminMessage() { 
     if (this.adminMessage && this.authService.getEmail()) {
       console.log(this.adminMessage)
@@ -45,4 +44,5 @@ export class ChatAdminComponent {
       this.adminMessage=""
     }
   }
+
 }
