@@ -9,6 +9,7 @@ import { ChatMessage } from './chatmodel';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
+  
   userMessage!: string;
 
   constructor(private chatService: ChatService, private authService: AuthService) {}

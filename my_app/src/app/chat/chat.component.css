@@ -30,6 +30,7 @@ li{
     margin-top: 70px;
     margin-bottom:20px;
     background-color: #eeeeee;
+    overflow: auto;
 }
 
 button{
