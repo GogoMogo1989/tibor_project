@@ -10,9 +10,9 @@
      <span  routerLink="/admin-main/view-login-admin">View Users</span>
    </button>
    <button mat-button class="button">
-    <span routerLink="/admin-main/chat-admin" [ngClass]="{'chat-unread': isChatUnread}" (click)="markAsRead()" >Chat</span>
+    <span routerLink="/chat" [ngClass]="{'chat-unread': isChatUnread}" (click)="markAsRead()" >Chat</span>
   </button>
-  <button mat-button class="button">
+  <button mat-button class="button" (click)="markAsRead()">
     <span routerLink="/login" >Logout</span>
   </button>
 </mat-toolbar>
@@ -24,10 +24,10 @@
     <button mat-button class="button2" (click)="drawer.toggle()">
      <span routerLink="/admin-main/view-login-admin">View Users</span>
     </button>
-    <button mat-button class="button2" [ngClass]="{'chat-unread': isChatUnread}" (click)="markAsRead()">
+    <button mat-button class="button2" [ngClass]="{'chat-unread': isChatUnread}">
       <span routerLink="admin-main/chat-admin" >Chat</span>
     </button>
-    <button mat-button class="button2">
+    <button mat-button class="button2" (click)="markAsRead()">
         <span routerLink="/login" >Logout</span>
     </button>
   </mat-drawer>

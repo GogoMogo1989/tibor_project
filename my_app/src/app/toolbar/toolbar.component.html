@@ -18,7 +18,7 @@
   <button mat-button class="button">
     <span routerLink="/chat" [ngClass]="{'chat-unread': isChatUnread}" (click)="markAsRead()" >Chat</span>
   </button>
-  <button mat-button class="button">
+  <button mat-button class="button" (click)="markAsRead()">
     <span routerLink="/login" >{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
   </button>
 </mat-toolbar>
@@ -39,7 +39,7 @@
     <button mat-button class="button2" (click)="drawer.toggle()">
       <span routerLink="/signup">Sign Up</span>
     </button>
-    <button mat-button class="button2" (click)="drawer.toggle()">
+    <button mat-button class="button2" (click)="drawer.toggle()" >
       <span routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
     </button>
   </mat-drawer>
