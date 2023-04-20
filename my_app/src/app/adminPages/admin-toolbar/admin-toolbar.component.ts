@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 @Component({
@@ -6,7 +6,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   templateUrl: './admin-toolbar.component.html',
   styleUrls: ['./admin-toolbar.component.css']
 })
-export class AdminToolbarComponent implements OnInit {
+export class AdminToolbarComponent{
   isChatUnread: boolean = false;
   socket!: WebSocketSubject<any>;
 
