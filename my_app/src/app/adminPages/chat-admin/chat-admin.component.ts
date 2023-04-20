@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminChatService } from 'src/app/services/adminchatservice';
+import { ChatService } from 'src/app/services/chatservice';
 import { AuthService } from 'src/app/services/loginservices';
 import { ChatMessage } from 'src/app/chat/chatmodel';
 
@@ -11,14 +11,14 @@ import { ChatMessage } from 'src/app/chat/chatmodel';
 export class ChatAdminComponent {
   adminMessage!: string;
 
-  constructor(private chatService: AdminChatService, private authService: AuthService) {}
+  constructor(private chatService: ChatService, private authService: AuthService) {}
 
   get messages(): ChatMessage[] {
     return this.chatService.messages;
   }
 
   sendAdminMessage() {
-    this.chatService.sendAdminMessage(this.adminMessage);
+    this.chatService.sendMessage(this.adminMessage);
     this.adminMessage="";
   }
 }

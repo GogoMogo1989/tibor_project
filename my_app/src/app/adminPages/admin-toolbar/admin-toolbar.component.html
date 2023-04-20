@@ -24,7 +24,7 @@
     <button mat-button class="button2" (click)="drawer.toggle()">
      <span routerLink="/admin-main/view-login-admin">View Users</span>
     </button>
-    <button mat-button class="button2">
+    <button mat-button class="button2" [ngClass]="{'chat-unread': isChatUnread}" (click)="markAsRead()">
       <span routerLink="admin-main/chat-admin" >Chat</span>
     </button>
     <button mat-button class="button2">

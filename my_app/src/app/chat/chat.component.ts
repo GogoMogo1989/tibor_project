@@ -19,7 +19,7 @@ export class ChatComponent {
   }
 
   sendUserMessage() {
-    this.chatService.sendUserMessage(this.userMessage);
+    this.chatService.sendMessage(this.userMessage);
     this.userMessage="";
   }
 }

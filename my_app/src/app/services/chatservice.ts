@@ -26,7 +26,7 @@ export class ChatService {
     );
   }
 
-  sendUserMessage(message: string) {
+  sendMessage(message: string) {
     if (message && this.authService.getEmail()) {
       console.log(message)
       console.log(this.authService.getEmail())

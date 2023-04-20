@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { AuthService } from 'src/app/services/loginservices';
 
 @Component({
   selector: 'app-admin-toolbar',
@@ -7,6 +8,13 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   styleUrls: ['./admin-toolbar.component.css']
 })
 export class AdminToolbarComponent{
+
+  constructor(private authService: AuthService) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
   isChatUnread: boolean = false;
   socket!: WebSocketSubject<any>;
 
