@@ -39,7 +39,7 @@
     <button mat-button class="button2" (click)="drawer.toggle()">
       <span routerLink="/signup">Sign Up</span>
     </button>
-    <button mat-button class="button2" (click)="drawer.toggle()" >
+    <button mat-button class="button2" (click)="drawer.toggle()" (click)="markAsRead()" >
       <span routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login' }}</span>
     </button>
   </mat-drawer>

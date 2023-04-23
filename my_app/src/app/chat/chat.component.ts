@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ChatService } from '../services/chatservice';
-import { AuthService } from '../services/loginservices';
 import { ChatMessage } from './chatmodel';
 
 @Component({
@@ -12,7 +11,7 @@ export class ChatComponent {
   
   userMessage!: string;
 
-  constructor(private chatService: ChatService, private authService: AuthService) {}
+  constructor(private chatService: ChatService) {}
 
   get messages(): ChatMessage[] {
     return this.chatService.messages;
