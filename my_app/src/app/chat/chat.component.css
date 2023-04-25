@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 li{
@@ -27,7 +27,7 @@ li{
     width: 80%;
     border-style: solid;
     border-color: black;
-    margin-top: 70px;
+    margin-top: 10px;
     margin-bottom:20px;
     background-color: #eeeeee;
     overflow: auto;
@@ -39,4 +39,8 @@ button{
 
 input{
     background-color: #eeeeee;
+}
+
+.option{
+    margin-top:80px;
 }

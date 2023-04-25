@@ -1,14 +1,9 @@
 <div class="chat">
-  <div>
+  <div class="option">
     <mat-select placeholder="Felhasználók" [(ngModel)]="selectedUser">
       <mat-option *ngFor="let user of users" [value]="user.email">{{user.email}}</mat-option>
     </mat-select>
   </div>
-  <div class="message">
-    <input matInput type="text" [(ngModel)]="adminMessage" (keyup.enter)="sendAdminMessage()">
-    <button mat-raised-button  color="primary" (click)="sendAdminMessage()">Küldés</button>
-  </div>
-
   <div class="message-view">
     <ul>
       <li *ngFor="let message of messages">
@@ -22,5 +17,9 @@
         </ng-container>
       </li>
     </ul>
+  </div>
+  <div class="message">
+    <input matInput type="text" [(ngModel)]="adminMessage" (keyup.enter)="sendAdminMessage()">
+    <button mat-raised-button  color="primary" (click)="sendAdminMessage()">Küldés</button>
   </div>
 </div>
