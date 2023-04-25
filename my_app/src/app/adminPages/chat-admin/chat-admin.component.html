@@ -1,4 +1,9 @@
 <div class="chat">
+  <div>
+    <mat-select placeholder="Felhasználók" [(ngModel)]="selectedUser">
+      <mat-option *ngFor="let user of users" [value]="user.email">{{user.email}}</mat-option>
+    </mat-select>
+  </div>
   <div class="message">
     <input matInput type="text" [(ngModel)]="adminMessage" (keyup.enter)="sendAdminMessage()">
     <button mat-raised-button  color="primary" (click)="sendAdminMessage()">Küldés</button>
@@ -6,7 +11,16 @@
 
   <div class="message-view">
     <ul>
-     <li *ngFor="let message of messages">{{message.email}} - {{message.content}}</li>
+      <li *ngFor="let message of messages">
+        <ng-container *ngIf="message.email && message.content">
+          <ng-container *ngIf="message.email === authService.getEmail(); else receivedMessage">
+            {{ message.email }} - {{ message.content }}
+          </ng-container>
+          <ng-template #receivedMessage>
+            {{ message.email }} - {{ message.content }}
+          </ng-template>
+        </ng-container>
+      </li>
     </ul>
   </div>
 </div>

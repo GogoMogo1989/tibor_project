@@ -8,14 +8,15 @@
     styleUrls: ['./toolbar.component.css']
   })
   export class ToolbarComponent {
+
+    isChatUnread: boolean = false;
+    socket!: WebSocketSubject<any>;
+
     constructor(private authService: AuthService) {}
 
     isLoggedIn(): boolean {
       return this.authService.isLoggedIn();
     }
-
-    isChatUnread: boolean = false;
-    socket!: WebSocketSubject<any>;
   
     ngOnInit() {
       this.socket = webSocket('ws://localhost:8080');

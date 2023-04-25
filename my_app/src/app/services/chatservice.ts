@@ -26,13 +26,12 @@ export class ChatService {
     );
   }
 
-  sendMessage(message: string) {
-    if (message && this.authService.getEmail()) {
-      console.log(message)
-      console.log(this.authService.getEmail())
-      const chatMessage: ChatMessage = { content: message, email: this.authService.getEmail() };
+  sendMessage(message: string, recipientEmail: string, senderEmail: string) {
+    if (message) {
+      const chatMessage: ChatMessage = { content: message, email: senderEmail, recipientEmail: recipientEmail };
       this.socket.next(chatMessage);
       console.log('Sent message:', chatMessage);
     }
   }
+  
 }
