@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { AuthService } from './loginservices';
 import { ChatMessage } from '../chat/chatmodel';
 
 @Injectable({
@@ -10,7 +9,7 @@ export class ChatService {
   private socket!: WebSocketSubject<ChatMessage>;
   messages: ChatMessage[] = [];
 
-  constructor(private authService: AuthService) {
+  constructor() {
     this.socket = webSocket<ChatMessage>('ws://localhost:8080');
     this.socket.subscribe(
       (message: ChatMessage) => {
