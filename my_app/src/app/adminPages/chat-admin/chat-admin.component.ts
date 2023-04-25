@@ -22,7 +22,6 @@ export class ChatAdminComponent {
         this.users = users;
         console.log(users)
       });
-      console.log(this.messages)
   }
 
 
