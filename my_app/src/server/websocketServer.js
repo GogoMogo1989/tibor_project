@@ -26,7 +26,7 @@ server.on('connection', (socket) => {
     // Az üzenet továbbítása a címzetthez
     const recipientEmail = parsedMessage.recipientEmail; //Címzett email címének mentése
     if (clients.has(recipientEmail)) { //Ha a clients map-ben szerepel az recipientEmail értéke akkor:
-      const recipientSocket = clients.get(recipientEmail)
+      const recipientSocket = clients.get(recipientEmail) //Vissza adjuk az recipientEmail (kulcsohoz) tartozó értéket
       recipientSocket.send(JSON.stringify(parsedMessage)); //JSON-ban elküldük az kivett email című címzettnek az üzenetet
       console.log('Üzenet elküldve:', parsedMessage); 
     } else {
