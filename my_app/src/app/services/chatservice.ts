@@ -27,10 +27,14 @@ export class ChatService {
 
   sendMessage(message: string, recipientEmail: string, senderEmail: string) {
     if (message) {
-      const chatMessage: ChatMessage = { content: message, email: senderEmail, recipientEmail: recipientEmail };
+      const chatMessage: ChatMessage = {
+        content: message,
+        email: senderEmail,
+        recipientEmail: recipientEmail,
+      };
       this.socket.next(chatMessage);
       console.log('Sent message:', chatMessage);
     }
   }
-  
+
 }
