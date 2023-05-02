@@ -17,46 +17,29 @@ server.on('connection', (socket) => {
 
   // Eseménykezelő a kliens azonosítójának fogadására
   socket.on('message', (message) => {
-    const parsedMessage = JSON.parse(message);
+    const parsedMessage = JSON.parse(message); //ParsedMessage-ban a message (CHatMessage) értékét mentjük
   
-    clientEmail = parsedMessage.email;
-
-      // Kliens hozzáadása a tárolóhoz
-      clients.set(clientEmail, socket);
-
-      // Kiírjuk az összes e-mail címet a konzolra
-      console.log('Csatlakozott felhasználók email-ei:', Array.from(clients.keys()));
+    clientEmail = parsedMessage.email; //Kivesszük az email címet
+    clients.set(clientEmail, socket); // Kliens hozzáadása a tárolóhoz
+    console.log('Csatlakozott felhasználók email-ei:', Array.from(clients.keys())); // Kiírjuk az összes e-mail címet a konzolra
 
     // Az üzenet továbbítása a címzetthez
-    const recipientEmail = parsedMessage.recipientEmail;
-    if (clients.has(recipientEmail)) {
-      const recipientSocket = clients.get(recipientEmail);
-      recipientSocket.send(JSON.stringify(parsedMessage));
-      console.log('Üzenet elküldve:', parsedMessage);
+    const recipientEmail = parsedMessage.recipientEmail; //Címzett email címének mentése
+    if (clients.has(recipientEmail)) { //Ha a clients map-ben szerepel az recipientEmail értéke akkor:
+      const recipientSocket = clients.get(recipientEmail)
+      recipientSocket.send(JSON.stringify(parsedMessage)); //JSON-ban elküldük az kivett email című címzettnek az üzenetet
+      console.log('Üzenet elküldve:', parsedMessage); 
     } else {
       console.log('Címzett email nem található:', recipientEmail);
     }
 
-    socket.send(JSON.stringify(parsedMessage));
-    
+    //JSON-ban elküldjük az üzenet küldőjének is az üzenetet.
+    socket.send(JSON.stringify(parsedMessage)); 
+
   });
 
   // Eseménykezelő a kliens lecsatlakozására
   socket.on('close', () => {
     console.log('Client disconnected');
-
-    // Az eltávolítandó kliens azonosítójának keresése a tárolóban
-    let key = null;
-    for (const [email, clientSocket] of clients.entries()) {
-      if (clientSocket === socket) {
-        key = email;
-        break;
-      }
-    }
-
-    // Kliens eltávolítása a tárolóból
-    if (key) {
-      clients.delete(key);
-    }
   });
 });
