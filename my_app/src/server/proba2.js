@@ -95,15 +95,16 @@ app.delete('/api/data/:id', (req, res) => {
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
-  isAdmin: Boolean
+  isAdmin: Boolean,
+  yourAdminEmail: String
 });
 
 const User = mongoose.model('User', userSchema);
 
 app.post('/signup', (req, res) => {
-  const { email, password, isAdmin } = req.body;
+  const { email, password, isAdmin, yourAdminEmail } = req.body;
 
-  const newUser = new User({ email, password, isAdmin });
+  const newUser = new User({ email, password, isAdmin, yourAdminEmail });
 
   newUser.save()
     .then(() => {

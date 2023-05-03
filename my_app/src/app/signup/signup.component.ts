@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/signupservices';
 
@@ -52,7 +51,7 @@ export class SignupComponent {
   adminEmails: string[] = [];
   randomAdminString: string = '';
 
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
     this.userService.getUsers().subscribe((users: any[]) => {
@@ -72,12 +71,23 @@ export class SignupComponent {
           const email = this.signupForm.controls.email.value;
           const password = this.signupForm.controls.password.value;
           const isAdmin = this.signupForm.controls.isAdmin.value; 
+          let yourAdminEmail = "";
+          if (!isAdmin) {
+            yourAdminEmail = this.randomAdminString ;
+          }
           if (email !== null) {
-            this.userService.createUser(email ? email: undefined, password? password: undefined, isAdmin? isAdmin: undefined).subscribe(_response => {
-              console.log('Sikeres felhasználó mentés a szerveren!');
-              this.router.navigate(['/login']);
-              alert('Sikeres regisztráció!');
-              this.ngOnInit()
+            this.userService.createUser(email ? email: undefined, password? password: undefined, isAdmin? isAdmin: undefined, yourAdminEmail? yourAdminEmail: undefined).subscribe(_response => {
+              if(isAdmin === true){
+                console.log('Sikeres felhasználó mentés a szerveren!');
+                this.router.navigate(['/login']);
+                alert('Sikeres regisztráció admin felhasználóként!');
+                this.ngOnInit()
+              } else {
+                console.log(`Sikeres felhasználó mentés a szerveren! A regisztrációhoz tartozó admin email címe: ${yourAdminEmail}`);
+                this.router.navigate(['/login']);
+                alert(`Sikeres regisztráció! A regisztrációhoz tartozó admin email címe: ${yourAdminEmail}`);
+                this.ngOnInit()
+              }
             }, error => {
               console.log('Hiba a felhasználó mentésekor a szerveren!', error);
             });
@@ -87,5 +97,6 @@ export class SignupComponent {
       alert('Jelszónak egyeznie kell, és kérlek fogadd el a felhasználási feltételeket!')
     }
   }
+  
   
 }
