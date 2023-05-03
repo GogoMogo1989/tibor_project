@@ -25,12 +25,13 @@ export class ChatService {
     );
   }
 
-  sendMessage(message: string, recipientEmail: string, senderEmail: string) {
+  sendMessage(message: string, recipientEmail: string, senderEmail: string, yourAdminEmail: string | null ) {
     if (message) {
       const chatMessage: ChatMessage = {
         content: message,
         email: senderEmail,
         recipientEmail: recipientEmail,
+        yourAdminEmail: yourAdminEmail || ""
       };
       this.socket.next(chatMessage);
       console.log('Sent message:', chatMessage);

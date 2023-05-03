@@ -27,7 +27,7 @@ li{
     width: 80%;
     border-style: solid;
     border-color: black;
-    margin-top: 10px;
+    margin-top: 80px;
     margin-bottom:20px;
     background-color: #eeeeee;
     overflow: auto;
@@ -43,4 +43,5 @@ input{
 
 .option{
     margin-top:80px;
+    display: none;
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { tap, map, switchMap } from 'rxjs/operators';
-import { LocalStorageService } from './localstorageservice';
+import {  map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,7 +11,7 @@ export class AuthService {
 
   private currentUserSubject: BehaviorSubject<any>;
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+  constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser')
     if (storedUser) {
       try {
@@ -39,8 +38,11 @@ export class AuthService {
           const isAdmin = response.isAdmin;
           console.log(isAdmin)
           const userId = response.userId;
+          const yourAdminEmail = response.yourAdminEmail
           localStorage.setItem('_id', userId);
+          localStorage.setItem('yourAdminEmail', yourAdminEmail);
           localStorage.setItem('currentUser', JSON.stringify(response));
+          console.log(yourAdminEmail)
           this.currentUserSubject.next(response);
           this.saveEmail(email);
           return { userId, ...response };
@@ -74,8 +76,6 @@ export class AuthService {
     localStorage.setItem('email', email);
     return email;
   }
-
-  
 
   deleteUser() {
     const userId = localStorage.getItem('_id');

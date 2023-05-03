@@ -129,7 +129,7 @@ app.post('/login', (req, res) => {
       } else {
         console.log('Bejelentkezés sikeres!');
         console.log('A felhasználó _id-je:', user._id);
-        res.status(200).json({ message: 'Bejelentkezés sikeres!', userId: user._id, isAdmin: user.isAdmin });
+        res.status(200).json({ message: 'Bejelentkezés sikeres!', userId: user._id, isAdmin: user.isAdmin, yourAdminEmail: user.yourAdminEmail });
       }
     })
     .catch(err => {

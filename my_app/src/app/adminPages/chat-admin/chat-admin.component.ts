@@ -13,6 +13,7 @@ export class ChatAdminComponent {
   adminMessage!: string;
   users: any[] = [];
   selectedUser: string = '';
+  yourAdminEmail: string | null = null;
 
   constructor(private chatService: ChatService, private http: HttpClient, public authService: AuthService) {}
 
@@ -34,7 +35,7 @@ export class ChatAdminComponent {
   }
 
   sendAdminMessage() {
-    this.chatService.sendMessage(this.adminMessage, this.selectedUser, this.authService.getEmail());
+    this.chatService.sendMessage(this.adminMessage, this.selectedUser, this.authService.getEmail(), this.yourAdminEmail);
     this.adminMessage="";
   }
 }
