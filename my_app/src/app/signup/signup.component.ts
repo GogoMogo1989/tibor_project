@@ -49,7 +49,21 @@ export class SignupComponent {
     return this.signupForm.get('email') as FormControl;
   }
 
+  adminEmails: string[] = [];
+  randomAdminString: string = '';
+
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.getUsers().subscribe((users: any[]) => {
+      this.adminEmails = users
+        .filter((user: any) => user.isAdmin === true)
+        .map((user: any) => user.email);
+        this.randomAdminString = this.adminEmails[Math.floor(Math.random() * this.adminEmails.length)];
+        console.log(this.adminEmails)
+        console.log(this.randomAdminString)
+    });
+  }
 
   onSubmit() {
     if (this.signupForm.valid &&
@@ -63,6 +77,7 @@ export class SignupComponent {
               console.log('Sikeres felhasználó mentés a szerveren!');
               this.router.navigate(['/login']);
               alert('Sikeres regisztráció!');
+              this.ngOnInit()
             }, error => {
               console.log('Hiba a felhasználó mentésekor a szerveren!', error);
             });
