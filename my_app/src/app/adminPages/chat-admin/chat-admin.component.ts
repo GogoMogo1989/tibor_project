@@ -18,12 +18,13 @@ export class ChatAdminComponent {
   constructor(private chatService: ChatService, private http: HttpClient, public authService: AuthService) {}
 
   ngOnInit(): void {
-    // lekérjük a felhasználókat az API-ról
     this.http.get<any[]>('http://localhost:3000/users').subscribe(users => {
-      // a filter() metódussal kiválogatjuk azokat a felhasználókat, akiknek a yourAdminEmail mezője megegyezik az aktuális felhasználó email címével, vagy akiknek az isAdmin mezője true
-      const filteredUsers = users.filter(user => user.yourAdminEmail === this.authService.getEmail() || user.isAdmin);
-      // a map() metódussal létrehozzuk a felhasználók email címeiből álló tömböt
-      this.users = filteredUsers.map(user => user.email);
+      // a felhasználók email címeit pusholjuk a tömbbe, ha a yourAdminEmail mezője megegyezik az aktuális felhasználó email címével, vagy ha az isAdmin mező true
+      users.forEach(user => {
+        if (user.yourAdminEmail === this.authService.getEmail() || user.isAdmin) {
+          this.users.push(user.email);
+        }
+      });
       console.log(this.users);
     });
   }
