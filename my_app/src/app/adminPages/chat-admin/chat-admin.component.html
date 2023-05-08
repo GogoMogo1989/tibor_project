@@ -1,7 +1,7 @@
 <div class="chat">
   <div class="option">
     <mat-select placeholder="Felhasználók" [(ngModel)]="selectedUser">
-      <mat-option *ngFor="let user of users" [value]="user.email">{{user.email}}</mat-option>
+      <mat-option *ngFor="let user of users" [value]="user">{{user}}</mat-option>
     </mat-select>
   </div>
   <div class="message-view">
