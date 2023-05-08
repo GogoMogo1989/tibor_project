@@ -10,7 +10,7 @@ mat-toolbar{
   z-index: 1000;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 720px) {
  .example-icon{
   visibility: visible;
  }
@@ -22,7 +22,7 @@ mat-toolbar{
 .example-container {
   visibility: hidden;
   width: 50%;
-  height: 305px;
+  height: 300px;
   top:56px;
   position: fixed;
 }
